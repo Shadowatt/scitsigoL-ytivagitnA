@@ -1,109 +1,13 @@
+
 ---
 permalink: /quote/index.html
+title: "Get a Quote | Antigravity Logistics"
+description: "Request a free quote for transport, heavy handling, residential moves, medical equipment relocation, and disposal services across Sydney and NSW."
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Get a Quote | Antigravity Logistics</title>
-  <meta name="description" content="Request a free quote for transport, heavy handling, residential moves, medical equipment relocation, and disposal services across Sydney and NSW.">
-  <link rel="icon" href="/images/favicon.ico">
-  <link rel="stylesheet" href="/css/style.css">
-  <style>
-    /* Form specific styles */
-    .form-group { margin-bottom: 20px; }
-    .form-group label {
-      display: block;
-      font-family: var(--font-head);
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 6px;
-      color: var(--black);
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid var(--grey-light);
-      background: var(--white);
-      font-family: var(--font-body);
-      font-size: 1rem;
-      transition: border-color 0.2s ease;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--orange);
-    }
-    .form-group textarea { min-height: 120px; resize: vertical; }
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    @media (max-width: 640px) {
-      .form-row { grid-template-columns: 1fr; }
-    }
-    .form-success {
-      display: none;
-      background: #d4edda;
-      color: #155724;
-      padding: 20px 24px;
-      border-left: 4px solid #28a745;
-      margin-bottom: 24px;
-    }
-    .form-success.is-visible { display: block; }
-    .form-error {
-      display: none;
-      background: #f8d7da;
-      color: #721c24;
-      padding: 20px 24px;
-      border-left: 4px solid #dc3545;
-      margin-bottom: 24px;
-    }
-    .form-error.is-visible { display: block; }
-
-    /* Review stats section */
-    .review-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 32px;
-      align-items: center;
-      margin: 24px 0 8px;
-    }
-    .review-stats .stat {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-    .review-stats .stat .num {
-      color: var(--orange);
-      font-size: 2rem;
-      font-weight: 800;
-    }
-    .review-stats .stars {
-      color: #f5b342;
-      font-size: 1.6rem;
-      letter-spacing: 2px;
-    }
-    .review-stats .source {
-      color: var(--grey);
-      font-weight: 400;
-      font-size: 0.9rem;
-      font-family: var(--font-body);
-    }
-    @media (max-width: 480px) {
-      .review-stats .stat { font-size: 1rem; }
-      .review-stats .stat .num { font-size: 1.5rem; }
-      .review-stats .stars { font-size: 1.2rem; }
-    }
-  </style>
+  {% include "head.njk" %}
 </head>
 <body>
 
