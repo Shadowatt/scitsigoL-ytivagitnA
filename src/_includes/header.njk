@@ -1,12 +1,14 @@
 <header class="site-header">
   <div class="wrap">
-    <a href="" class="logo"><img src="images/logo.svg" alt="" class="logo-mark">Antigravity<span>Logistics</span></a>
+    <a href="{{ '/' | url }}" class="logo">
+      <img src="{{ '/images/logo.svg' | url }}" alt="Antigravity Logistics" style="width:80px; height:80px; filter: brightness(0) invert(1);">
+    </a>
     <nav class="nav-links" id="nav-links">
-      <a href="" {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a>
-      <a href="services/" {% if page.url == '/services/' %}aria-current="page"{% endif %}>Services</a>
-      <a href="whats-included/" {% if page.url == '/whats-included/' %}aria-current="page"{% endif %}>What's Included</a>
-      <a href="quote/" {% if page.url == '/quote/' %}aria-current="page"{% endif %}>Get a Quote</a>
-      <a href="contact/" {% if page.url == '/contact/' %}aria-current="page"{% endif %}>Contact</a>
+      <a href="{{ '/' | url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a>
+      <a href="{{ '/services/' | url }}" {% if page.url == '/services/' %}aria-current="page"{% endif %}>Services</a>
+      <a href="{{ '/whats-included/' | url }}" {% if page.url == '/whats-included/' %}aria-current="page"{% endif %}>What's Included</a>
+      <a href="{{ '/quote/' | url }}" {% if page.url == '/quote/' %}aria-current="page"{% endif %}>Get a Quote</a>
+      <a href="{{ '/contact/' | url }}" {% if page.url == '/contact/' %}aria-current="page"{% endif %}>Contact</a>
     </nav>
     <div class="header-actions">
       <a href="tel:+61422553675" class="header-phone">

@@ -2,17 +2,19 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <div class="footer-logo"><img src="images/logo.svg" alt="">Antigravity<span>Logistics</span></div>
+        <div class="footer-logo">
+          <img src="{{ '/images/logo.svg' | url }}" alt="Antigravity Logistics" style="width:160px; height:160px; filter: brightness(0) invert(1);">
+        </div>
         <p class="footer-tagline">Transport, heavy handling and logistics solutions across Sydney and NSW.</p>
       </div>
       <div>
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="">Home</a></li>
-          <li><a href="services/">Services</a></li>
-          <li><a href="whats-included/">What's Included</a></li>
-          <li><a href="quote/">Get a Quote</a></li>
-          <li><a href="contact/">Contact Us</a></li>
+          <li><a href="{{ '/' | url }}">Home</a></li>
+          <li><a href="{{ '/services/' | url }}">Services</a></li>
+          <li><a href="{{ '/whats-included/' | url }}">What's Included</a></li>
+          <li><a href="{{ '/quote/' | url }}">Get a Quote</a></li>
+          <li><a href="{{ '/contact/' | url }}">Contact Us</a></li>
         </ul>
       </div>
       <div>
