@@ -1,18 +1,16 @@
 <style>
   /* ==========================================================================
-     Footer — self-contained styles
+     Footer — self-contained styles (light theme matching header)
      ========================================================================== */
 
   .site-footer {
     position: relative;
-    background: var(--black-deep);
-    color: #b9b9bb;
+    background: var(--white);
+    color: var(--black);
     padding: 64px 0 32px;
   }
 
-  /* Signature divider — mirrors the header's bottom divider.
-     On the dark footer we use a subtle grey line + the orange tab,
-     which reads as the "inverted" version of the header's treatment. */
+  /* Signature divider — dark line with orange tab, mirrors the header */
 
   .site-footer::before {
     content: '';
@@ -21,7 +19,7 @@
     right: 0;
     top: 0;
     height: 3px;
-    background: #232426;
+    background: var(--black);
     pointer-events: none;
   }
 
@@ -41,7 +39,7 @@
     grid-template-columns: 1.4fr 1fr 1fr;
     gap: 40px;
     padding-bottom: 40px;
-    border-bottom: 1px solid #232426;
+    border-bottom: 1px solid var(--grey-light);
   }
 
   @media (max-width: 700px) {
@@ -50,12 +48,15 @@
 
   .footer-grid h4 {
     font-family: var(--font-head);
-    color: var(--white);
+    color: var(--black);
     font-size: 1.05rem;
     margin-bottom: 16px;
   }
 
-  .footer-tagline { max-width: 40ch; }
+  .footer-tagline {
+    max-width: 40ch;
+    color: #4d4d4f;
+  }
 
   .footer-grid ul li { margin-bottom: 10px; }
 
@@ -64,6 +65,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    color: var(--black);
     transition: color 0.2s ease;
   }
 
@@ -111,6 +113,7 @@
     flex-wrap: wrap;
     gap: 12px;
     font-size: 0.9rem;
+    color: var(--grey);
   }
 
   /* ---- Footer logo --------------------------------------------- */
@@ -132,7 +135,7 @@
     height: 120px;
     display: block;
     flex-shrink: 0;
-    filter: brightness(0) invert(1);
+    /* no filter — dark logo reads fine on light background */
   }
 
   .footer-logo::after {
