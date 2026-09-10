@@ -9,12 +9,6 @@ description: "See what's included with every Antigravity Logistics job — profe
   {% include "head.njk" %}
 
   <style>
-    /* ==========================================================================
-       What's Included page — self-contained styles
-       ========================================================================== */
-
-    /* ---- Included grid — visual icon cards ---- */
-
     .included-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -52,9 +46,7 @@ description: "See what's included with every Antigravity Logistics job — profe
       border-color: var(--grey-light);
     }
 
-    .included-card:hover::before {
-      transform: scaleY(1);
-    }
+    .included-card:hover::before { transform: scaleY(1); }
 
     .included-icon {
       width: 44px;
@@ -74,10 +66,7 @@ description: "See what's included with every Antigravity Logistics job — profe
       transform: scale(1.05);
     }
 
-    .included-icon svg {
-      width: 22px;
-      height: 22px;
-    }
+    .included-icon svg { width: 22px; height: 22px; }
 
     .included-card h3 {
       font-family: var(--font-head);
@@ -104,8 +93,6 @@ description: "See what's included with every Antigravity Logistics job — profe
       .included-card p { font-size: 0.88rem; }
     }
 
-    /* ---- Pricing split section ---- */
-
     .pricing-section {
       background: var(--black);
       color: var(--white);
@@ -114,8 +101,6 @@ description: "See what's included with every Antigravity Logistics job — profe
 
     .pricing-section h2 { color: var(--white); }
     .pricing-section p { color: #cfcfd1; }
-
-    /* ---- Quote band (same pattern as other pages) ---- */
 
     .quote-band {
       background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
@@ -157,10 +142,7 @@ description: "See what's included with every Antigravity Logistics job — profe
     }
 
     @media (max-width: 800px) {
-      .quote-band-content {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
+      .quote-band-content { grid-template-columns: 1fr; gap: 32px; }
     }
 
     .quote-band-eyebrow {
@@ -213,8 +195,6 @@ description: "See what's included with every Antigravity Logistics job — profe
 
 {% include "header.njk" %}
 
-<!-- ====== PAGE HEADER ====== -->
-
 <section class="page-header">
   <div class="wrap">
     <div class="hero-eyebrow">What's Included</div>
@@ -224,8 +204,6 @@ description: "See what's included with every Antigravity Logistics job — profe
 </section>
 
 <div class="bar-divider"></div>
-
-<!-- ====== INCLUDED GRID ====== -->
 
 <section class="section">
   <div class="wrap reveal">
@@ -346,7 +324,7 @@ description: "See what's included with every Antigravity Logistics job — profe
   </div>
 </section>
 
-<!-- ====== HOW PRICING WORKS ====== -->
+<!-- ====== HOW PRICING WORKS (real photo) ====== -->
 
 <section class="pricing-section">
   <div class="wrap split">
@@ -357,7 +335,7 @@ description: "See what's included with every Antigravity Logistics job — profe
       <a href="{{ '/quote/' | url }}" class="btn">Get a Quote</a>
     </div>
     <div class="media reveal">
-      <img src="{{ '/images/photo-placeholder.svg' | url }}" alt="Placeholder — replace with a photo of a job in progress" loading="lazy">
+      <img src="{{ '/images/photos/wrapped-couch.jpeg' | url }}" alt="Couch wrapped in protective film before transport" loading="lazy" decoding="async">
     </div>
   </div>
 </section>

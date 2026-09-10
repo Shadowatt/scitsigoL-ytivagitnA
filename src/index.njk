@@ -13,16 +13,12 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
        Homepage — self-contained styles
        ========================================================================== */
 
-    /* ---- Hero — CTA row with quote button prominent ---- */
-
     .hero .btn-row {
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
       align-items: center;
     }
-
-    /* ---- Quote band — conversion push after "How It Works" ---- */
 
     .quote-band {
       background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
@@ -115,8 +111,6 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       .quote-band-text h2 { font-size: 1.8rem; }
     }
 
-    /* ---- Slightly more breathing room for the review subtitle ---- */
-
     .reviews-sub {
       color: #cfcfd1;
       font-size: 1.05rem;
@@ -128,8 +122,6 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
 <body>
 
 {% include "header.njk" %}
-
-<!-- ====== HERO ====== -->
 
 <section class="hero">
   <div class="hero-mark"></div>
@@ -144,8 +136,6 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
   </div>
 </section>
 
-<!-- ====== TRUST BAR ====== -->
-
 <section class="trust-bar">
   <div class="wrap">
     <div class="trust-item"><span class="num">✓</span> Fully Insured</div>
@@ -157,7 +147,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
 
 <div class="bar-divider"></div>
 
-<!-- ====== ABOUT SPLIT ====== -->
+<!-- ====== ABOUT SPLIT — now with real photo ====== -->
 
 <section class="section">
   <div class="wrap split">
@@ -169,7 +159,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       <a href="{{ '/whats-included/' | url }}" class="tile-link">See what's included →</a>
     </div>
     <div class="media reveal">
-      <img src="{{ '/images/photo-placeholder.svg' | url }}" alt="Placeholder — replace with a photo of the team or truck" loading="lazy">
+      <img src="{{ '/images/photos/2-men-with-long-yellow-item.jpeg' | url }}" alt="Two Antigravity Logistics team members carrying a long heavy item together" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -248,7 +238,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
   </div>
 </section>
 
-<!-- ====== QUOTE BAND (conversion push) ====== -->
+<!-- ====== QUOTE BAND ====== -->
 
 <section class="quote-band">
   <div class="wrap">
@@ -310,8 +300,6 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
     </div>
   </div>
 </section>
-
-<!-- ====== BOTTOM CTA ====== -->
 
 <section class="cta-band">
   <div class="wrap">

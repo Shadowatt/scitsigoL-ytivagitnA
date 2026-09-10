@@ -10,8 +10,6 @@
     z-index: 100;
   }
 
-  /* Signature divider — dark line with orange tab, mirrors .bar-divider */
-
   .site-header::after {
     content: '';
     position: absolute;
@@ -45,8 +43,6 @@
     gap: 24px;
   }
 
-  /* ---- Logo — scale on hover ----------------------------------- */
-
   .logo {
     display: flex;
     align-items: center;
@@ -74,11 +70,9 @@
     height: 80px;
   }
 
-  /* ---- Nav links — animated underline -------------------------- */
-
   .nav-links {
     display: flex;
-    gap: 36px;
+    gap: 28px;
     flex-shrink: 1;
   }
 
@@ -91,8 +85,6 @@
     padding: 6px 0;
     transition: color 0.2s ease;
   }
-
-  /* Animated underline — slides in from left */
 
   .nav-links a::after {
     content: '';
@@ -117,8 +109,6 @@
     transform: scaleX(1);
   }
 
-  /* Active page — underline stays visible */
-
   .nav-links a[aria-current="page"] {
     color: var(--black);
   }
@@ -127,16 +117,12 @@
     transform: scaleX(1);
   }
 
-  /* ---- Header actions ------------------------------------------ */
-
   .header-actions {
     display: flex;
     align-items: center;
     gap: 16px;
     flex-shrink: 0;
   }
-
-  /* Phone button — lift + fill on hover */
 
   .header-phone {
     display: flex;
@@ -171,8 +157,6 @@
     transform: rotate(-12deg);
   }
 
-  /* Hamburger — rotate 90° on hover */
-
   .nav-toggle {
     display: none;
     background: none;
@@ -191,7 +175,10 @@
 
   .nav-toggle svg { width: 26px; height: 26px; }
 
-  /* ---- Mobile navigation --------------------------------------- */
+  @media (max-width: 900px) {
+    .nav-links { gap: 20px; }
+    .nav-links a { font-size: 1rem; }
+  }
 
   @media (max-width: 800px) {
     .nav-toggle { display: block; }
@@ -211,9 +198,7 @@
       z-index: 2;
     }
 
-    .nav-links.is-open { max-height: 360px; }
-
-    /* Disable the desktop underline effect on mobile */
+    .nav-links.is-open { max-height: 440px; }
 
     .nav-links a {
       display: block;
@@ -241,8 +226,6 @@
     .header-phone { padding: 8px 10px; }
     .logo img { width: 64px; height: 64px; }
   }
-
-  /* Respect reduced-motion users */
 
   @media (prefers-reduced-motion: reduce) {
     .logo,
@@ -277,6 +260,7 @@
       <a href="{{ '/' | url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a>
       <a href="{{ '/services/' | url }}" {% if page.url == '/services/' %}aria-current="page"{% endif %}>Services</a>
       <a href="{{ '/whats-included/' | url }}" {% if page.url == '/whats-included/' %}aria-current="page"{% endif %}>What's Included</a>
+      <a href="{{ '/gallery/' | url }}" {% if page.url == '/gallery/' %}aria-current="page"{% endif %}>Gallery</a>
       <a href="{{ '/quote/' | url }}" {% if page.url == '/quote/' %}aria-current="page"{% endif %}>Get a Quote</a>
       <a href="{{ '/contact/' | url }}" {% if page.url == '/contact/' %}aria-current="page"{% endif %}>Contact</a>
     </nav>
