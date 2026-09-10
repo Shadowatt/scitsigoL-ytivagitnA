@@ -23,8 +23,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
       .quote-layout { grid-template-columns: 1fr; gap: 40px; }
     }
 
-    /* ---- Form submit button ---------------------------------------- */
-
     .quote-submit {
       width: 100%;
       text-align: center;
@@ -46,8 +44,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
       max-width: 100%;
     }
 
-    /* ---- Info column ----------------------------------------------- */
-
     .info-block {
       margin-bottom: 40px;
     }
@@ -56,8 +52,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
       font-size: 1.6rem;
       margin-bottom: 24px;
     }
-
-    /* Numbered steps */
 
     .next-steps {
       list-style: none;
@@ -111,8 +105,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
       max-width: 100%;
     }
 
-    /* Prefer to call card */
-
     .call-card {
       padding: 24px 26px;
       background: var(--off-white);
@@ -158,8 +150,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
       margin: 0 0 16px;
     }
 
-    /* Stars */
-
     .review-stars {
       display: flex;
       gap: 3px;
@@ -169,8 +159,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
       letter-spacing: 1px;
       margin-bottom: 10px;
     }
-
-    /* Rating number + source */
 
     .review-rating {
       display: flex;
@@ -203,8 +191,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
       margin-left: 4px;
     }
 
-    /* Caption + link */
-
     .rating-caption {
       font-size: 0.95rem;
       color: #4d4d4f;
@@ -219,9 +205,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
     }
 
     .reviews-summary .read-link:hover { color: var(--orange-dark); }
-
-    /* Success / error messages use the existing .form-success / .form-error
-       styles defined in css/style.css */
 
     @media (max-width: 480px) {
       .call-card a { font-size: 1.4rem; }
@@ -256,7 +239,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
 
       <!-- FORM COLUMN -->
       <div>
-        <!-- Success / Error messages -->
         <div id="formSuccess" class="form-success">
           <strong>✅ Thank you!</strong> Your quote request has been sent. We'll get back to you within 24 hours.
         </div>
@@ -265,30 +247,23 @@ description: "Request a free quote for transport, heavy handling, residential mo
         </div>
 
         <form id="quoteForm" action="https://api.web3forms.com/submit" method="POST">
-          <!-- Replace with your Web3Forms access key -->
           <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-
-          <!-- Bot protection (honeypot) -->
           <input type="checkbox" name="botcheck" style="display: none;">
-
-          <!-- Email subject line -->
           <input type="hidden" name="subject" value="New Quote Request from Antigravity Logistics">
 
-          <!-- Service -->
           <div class="form-group">
             <label for="service">What service do you need? *</label>
             <select id="service" name="service" required>
               <option value="">— Please select —</option>
-              <option value="Transport & Logistics">Transport &amp; Logistics</option>
-              <option value="Heavy Handling">Heavy Handling</option>
-              <option value="Hospital & Medical Equipment">Hospital &amp; Medical Equipment</option>
-              <option value="Residential Move">Residential Move</option>
-              <option value="Disposal & Removal">Disposal &amp; Removal</option>
-              <option value="Other / Not sure">Other / Not sure</option>
+              <option value="transport">Transport &amp; Logistics</option>
+              <option value="heavy-handling">Heavy Handling</option>
+              <option value="medical">Hospital &amp; Medical Equipment</option>
+              <option value="residential">Residential Move</option>
+              <option value="disposal">Disposal &amp; Removal</option>
+              <option value="other">Other / Not sure</option>
             </select>
           </div>
 
-          <!-- Name + Email -->
           <div class="form-row">
             <div class="form-group">
               <label for="name">Your name *</label>
@@ -300,19 +275,16 @@ description: "Request a free quote for transport, heavy handling, residential mo
             </div>
           </div>
 
-          <!-- Phone -->
           <div class="form-group">
             <label for="phone">Phone number</label>
             <input type="tel" id="phone" name="phone" placeholder="0422 553 675">
           </div>
 
-          <!-- Job details -->
           <div class="form-group">
             <label for="message">Tell us about your job *</label>
             <textarea id="message" name="message" placeholder="What needs to be moved? Where from and to? Any stairs, tight access, or oversized items?" required></textarea>
           </div>
 
-          <!-- Locations -->
           <div class="form-row">
             <div class="form-group">
               <label for="pickup">Pickup suburb / postcode</label>
@@ -324,7 +296,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
             </div>
           </div>
 
-          <!-- Submit -->
           <button type="submit" class="btn quote-submit">Send Quote Request →</button>
 
           <p class="quote-note">We'll respond within 24 hours. Your details are safe with us.</p>
@@ -334,7 +305,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
       <!-- INFO COLUMN -->
       <div>
 
-        <!-- What happens next -->
         <div class="info-block">
           <h2>What happens next</h2>
           <ol class="next-steps">
@@ -357,7 +327,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
           </ol>
         </div>
 
-        <!-- Prefer to call -->
         <div class="info-block">
           <div class="call-card">
             <h3>Prefer to call?</h3>
@@ -366,7 +335,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
           </div>
         </div>
 
-        <!-- Reviews summary -->
         <div class="reviews-summary">
           <h3>What our customers say</h3>
           <div class="review-stars" aria-label="Rated 4.8 or higher out of 5">
@@ -392,7 +360,33 @@ description: "Request a free quote for transport, heavy handling, residential mo
 
 <script>
 // ============================================================
-// Form validation
+// 1. Pre-select service from URL (?service=transport)
+// ============================================================
+
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var serviceParam = params.get('service');
+  if (!serviceParam) return;
+
+  var select = document.getElementById('service');
+  if (!select) return;
+
+  for (var i = 0; i < select.options.length; i++) {
+    if (select.options[i].value === serviceParam) {
+      select.selectedIndex = i;
+      // Brief highlight so the user notices it was pre-filled
+      select.style.transition = 'box-shadow 0.4s ease';
+      select.style.boxShadow = '0 0 0 4px rgba(255, 80, 51, 0.25)';
+      setTimeout(function () {
+        select.style.boxShadow = 'none';
+      }, 1400);
+      break;
+    }
+  }
+})();
+
+// ============================================================
+// 2. Form validation
 // ============================================================
 
 const form = document.getElementById('quoteForm');
