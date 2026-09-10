@@ -1,9 +1,171 @@
+<style>
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--orange);
+    color: var(--white);
+    padding: 12px 20px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    z-index: 200;
+  }
+  .skip-link:focus { left: var(--gutter); top: var(--gutter); }
+
+  .site-header {
+    background: var(--black-deep);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .site-header .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 88px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  .logo-mark {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+  }
+  .logo:hover .logo-mark,
+  .logo:focus-visible .logo-mark {
+    transform: scale(1.08) rotate(-4deg);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+  }
+  .nav-links a {
+    position: relative;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--white);
+    padding: 6px 0;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .nav-links a:hover::after,
+  .nav-links a:focus-visible::after,
+  .nav-links a[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--white);
+    border: 2px solid var(--orange);
+    padding: 8px 16px;
+    white-space: nowrap;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .header-phone svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+  }
+  .header-phone:hover, .header-phone:focus-visible {
+    background: var(--orange);
+    color: var(--white);
+  }
+  .header-phone:hover svg, .header-phone:focus-visible svg {
+    transform: rotate(-8deg) scale(1.1);
+  }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    padding: 8px;
+  }
+  .nav-toggle svg { width: 26px; height: 26px; }
+  .nav-toggle .bar {
+    transition: transform 0.25s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+  .nav-toggle[aria-expanded="true"] .bar-1 { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] .bar-2 { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] .bar-3 { transform: translateY(-6px) rotate(-45deg); }
+
+  @media (max-width: 800px) {
+    .nav-toggle { display: block; }
+    .nav-links {
+      position: absolute;
+      top: 88px;
+      left: 0;
+      right: 0;
+      background: var(--black-deep);
+      flex-direction: column;
+      gap: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+    .nav-links.is-open { max-height: 320px; }
+    .nav-links a {
+      display: block;
+      padding: 16px var(--gutter);
+      border-bottom: 1px solid #2a2b2d;
+    }
+    .nav-links a::after { display: none; }
+    .nav-links a[aria-current="page"], .nav-links a:hover {
+      background: var(--black);
+    }
+  }
+
+  @media (max-width: 420px) {
+    .header-phone span.phone-label { display: none; }
+    .header-phone { padding: 8px 10px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-mark, .nav-links a::after, .header-phone svg, .nav-toggle .bar {
+      transition: none;
+    }
+  }
+</style>
+
+<a href="#main" class="skip-link">Skip to content</a>
 <header class="site-header">
   <div class="wrap">
-    <a href="{{ '/' | url }}" class="logo">
-      <img src="{{ '/images/logo.svg' | url }}" alt="Antigravity Logistics" style="width:80px; height:80px; filter: brightness(0) invert(1);">
+    <a href="{{ '/' | url }}" class="logo" aria-label="Antigravity Logistics home">
+      <img class="logo-mark" src="{{ '/images/logo.svg' | url }}" alt="" width="60" height="60">
     </a>
-    <nav class="nav-links" id="nav-links">
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
       <a href="{{ '/' | url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a>
       <a href="{{ '/services/' | url }}" {% if page.url == '/services/' %}aria-current="page"{% endif %}>Services</a>
       <a href="{{ '/whats-included/' | url }}" {% if page.url == '/whats-included/' %}aria-current="page"{% endif %}>What's Included</a>
@@ -12,11 +174,15 @@
     </nav>
     <div class="header-actions">
       <a href="tel:+61422553675" class="header-phone">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <span class="phone-label">0422 553 675</span>
       </a>
-      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line class="bar bar-1" x1="3" y1="6" x2="21" y2="6"/>
+          <line class="bar bar-2" x1="3" y1="12" x2="21" y2="12"/>
+          <line class="bar bar-3" x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
       </button>
     </div>
   </div>

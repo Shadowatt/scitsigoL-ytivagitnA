@@ -7,10 +7,168 @@ description: "Transport &amp; logistics, heavy handling, hospital &amp; medical 
 <html lang="en">
 <head>
   {% include "head.njk" %}
+
+  <style>
+    /* ==========================================================================
+       Services page — self-contained styles
+       ========================================================================== */
+
+    /* ---- Quote band (same pattern as homepage) ---- */
+
+    .quote-band {
+      background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-band::before {
+      content: '';
+      position: absolute;
+      right: -100px;
+      top: -100px;
+      width: 380px;
+      height: 380px;
+      background: var(--orange);
+      opacity: 0.07;
+      transform: rotate(45deg);
+      pointer-events: none;
+    }
+
+    .quote-band::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 6px;
+      height: 100%;
+      background: var(--orange);
+    }
+
+    .quote-band-content {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 800px) {
+      .quote-band-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    .quote-band-eyebrow {
+      display: inline-block;
+      color: var(--orange);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+    }
+
+    .quote-band-text h2 {
+      color: var(--white);
+      margin-bottom: 12px;
+      max-width: 22ch;
+    }
+
+    .quote-band-text p {
+      color: #cfcfd1;
+      margin: 0;
+      max-width: 52ch;
+      font-size: 1.05rem;
+    }
+
+    .quote-band .btn {
+      padding: 18px 38px;
+      font-size: 1.15rem;
+      white-space: nowrap;
+      border-color: var(--orange);
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .quote-band .btn:hover,
+    .quote-band .btn:focus-visible {
+      background: transparent;
+      color: var(--orange);
+    }
+
+    @media (max-width: 480px) {
+      .quote-band { padding: 56px 0; }
+      .quote-band .btn { padding: 16px 28px; font-size: 1.05rem; }
+      .quote-band-text h2 { font-size: 1.8rem; }
+    }
+
+    /* ---- Included-perks strip (visual checklist) ---- */
+
+    .perks-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2px;
+      background: var(--grey-light);
+      margin-top: 40px;
+    }
+
+    .perk {
+      background: var(--white);
+      padding: 28px 24px;
+      text-align: left;
+      transition: background 0.2s ease;
+    }
+
+    .perk:hover {
+      background: var(--off-white);
+    }
+
+    .perk-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--orange);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .perk-icon svg { width: 20px; height: 20px; }
+
+    .perk h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0 0 4px;
+    }
+
+    .perk p {
+      font-size: 0.9rem;
+      color: #4d4d4f;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ---- Section intro alignment ---- */
+
+    .services-intro {
+      max-width: 56ch;
+      color: #cfcfd1;
+      font-size: 1.05rem;
+      margin: 0 0 8px;
+    }
+  </style>
 </head>
 <body>
 
 {% include "header.njk" %}
+
+<!-- ====== PAGE HEADER ====== -->
 
 <section class="page-header">
   <div class="wrap">
@@ -22,25 +180,133 @@ description: "Transport &amp; logistics, heavy handling, hospital &amp; medical 
 
 <div class="bar-divider"></div>
 
+<!-- ====== SERVICES GRID ====== -->
+
 <section class="section section--dark">
   <div class="wrap reveal">
     <h2>Our Services</h2>
-    <p class="section-intro" style="max-width:56ch;">Five specialised areas where we make moving and handling simple, safe, and stress‑free.</p>
+    <p class="services-intro">Five specialised areas where we make moving and handling simple, safe, and stress‑free.</p>
   </div>
   <div class="wrap">
     <div class="service-grid reveal-group">
-      <!-- your service cards here -->
+
+      <div class="service-card reveal">
+        <div class="service-icon"><img src="{{ '/images/icon-transport.svg' | url }}" alt="" loading="lazy"></div>
+        <h3>Transport &amp; Logistics</h3>
+        <p>Reliable transport for furniture, boxes, crates, pallets, commercial goods, equipment and bulky items across Sydney and NSW.</p>
+        <a href="{{ '/quote/' | url }}" class="tile-link">Get a quote →</a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><img src="{{ '/images/icon-heavy-handling.svg' | url }}" alt="" loading="lazy"></div>
+        <h3>Heavy Handling</h3>
+        <p>Safe and efficient handling of heavy, oversized and difficult-to-move items, including loading, unloading and positioning.</p>
+        <a href="{{ '/quote/' | url }}" class="tile-link">Get a quote →</a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><img src="{{ '/images/icon-medical.svg' | url }}" alt="" loading="lazy"></div>
+        <h3>Hospital &amp; Medical Equipment</h3>
+        <p>Careful transport, relocation, positioning and removal of hospital and medical equipment for facilities and organisations.</p>
+        <a href="{{ '/quote/' | url }}" class="tile-link">Get a quote →</a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><img src="{{ '/images/icon-residential.svg' | url }}" alt="" loading="lazy"></div>
+        <h3>Residential Moves</h3>
+        <p>Professional house and apartment moving services, including furniture transport, loading, unloading, packing and heavy-item moving.</p>
+        <a href="{{ '/quote/' | url }}" class="tile-link">Get a quote →</a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><img src="{{ '/images/icon-disposal.svg' | url }}" alt="" loading="lazy"></div>
+        <h3>Disposal &amp; Removal</h3>
+        <p>Removal and disposal of unwanted furniture, equipment, household items, office contents and general rubbish.</p>
+        <a href="{{ '/quote/' | url }}" class="tile-link">Get a quote →</a>
+      </div>
+
     </div>
   </div>
 </section>
 
-<section class="cta-band">
+<!-- ====== PERKS STRIP ====== -->
+
+<section class="section">
+  <div class="wrap reveal">
+    <h2>Included with every job</h2>
+    <p class="section-intro" style="max-width:52ch;">No hidden extras — this is what you get on every job, every time.</p>
+  </div>
   <div class="wrap">
-    <div>
-      <h2>Not sure which service fits?</h2>
-      <p style="color: rgba(255,255,255,0.85); margin: 0;">Tell us what you're moving and we'll work out the right approach.</p>
+    <div class="perks-strip reveal-group">
+
+      <div class="perk reveal">
+        <div class="perk-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+        </div>
+        <h3>Fully insured</h3>
+        <p>Every job is covered, from pickup to drop-off.</p>
+      </div>
+
+      <div class="perk reveal">
+        <div class="perk-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3>Experienced team</h3>
+        <p>Professional movers with 10+ years in the industry.</p>
+      </div>
+
+      <div class="perk reveal">
+        <div class="perk-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="1" y="3" width="15" height="13"/>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+            <circle cx="5.5" cy="18.5" r="2.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+        </div>
+        <h3>Proper equipment</h3>
+        <p>Heavy-duty trolleys, straps and protective blankets.</p>
+      </div>
+
+      <div class="perk reveal">
+        <div class="perk-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3>On-time arrival</h3>
+        <p>We show up when we say we will — no waiting around.</p>
+      </div>
+
     </div>
-    <a href="/contact/" class="btn">Contact Us</a>
+    <div class="reveal" style="margin-top:32px;">
+      <a href="{{ '/whats-included/' | url }}" class="tile-link">See the full list →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== QUOTE BAND ====== -->
+
+<section class="quote-band">
+  <div class="wrap">
+    <div class="quote-band-content">
+      <div class="quote-band-text reveal">
+        <span class="quote-band-eyebrow">Free, no-obligation</span>
+        <h2>Not sure which service fits?</h2>
+        <p>Tell us what you're moving — even if you're not sure which category it falls under — and we'll work out the right approach and a fair price.</p>
+      </div>
+      <div class="reveal">
+        <a href="{{ '/quote/' | url }}" class="btn">Get a Quote →</a>
+      </div>
+    </div>
   </div>
 </section>
 

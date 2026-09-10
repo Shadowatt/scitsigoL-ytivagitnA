@@ -6,14 +6,14 @@
 
 :root {
   /* Color */
-  --black-deep: #0f1011;      /* nav, footer */
-  --black: #27282a;           /* primary dark surface, headings on light bg */
-  --orange: #ff5033;          /* single accent — CTAs, hover, markers */
-  --orange-dark: #d63f28;     /* hover state for orange elements */
-  --off-white: #f7f6f4;       /* main content background */
+  --black-deep: #0f1011;
+  --black: #27282a;
+  --orange: #ff5033;
+  --orange-dark: #d63f28;
+  --off-white: #f7f6f4;
   --white: #ffffff;
-  --grey: #8a8a8d;            /* secondary text */
-  --grey-light: #d8d7d4;      /* borders, dividers on light bg */
+  --grey: #8a8a8d;
+  --grey-light: #d8d7d4;
 
   /* Type */
   --font-head: 'Barlow Condensed', 'Arial Narrow', sans-serif;
@@ -91,28 +91,16 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   padding: 0 var(--gutter);
 }
 
-.section {
-  padding: var(--section-pad) 0;
-}
+.section { padding: var(--section-pad) 0; }
 
-.section--dark {
-  background: var(--black);
-  color: var(--white);
-}
-
-.section--darker {
-  background: var(--black-deep);
-  color: var(--white);
-}
+.section--dark { background: var(--black); color: var(--white); }
+.section--darker { background: var(--black-deep); color: var(--white); }
 
 .section--dark h1, .section--dark h2, .section--dark h3,
-.section--darker h1, .section--darker h2, .section--darker h3 {
-  color: var(--white);
-}
+.section--darker h1, .section--darker h2, .section--darker h3 { color: var(--white); }
 
 .section--dark p, .section--darker p { color: #cfcfd1; }
 
-/* thick divider bar with orange corner tab — used between major sections */
 .bar-divider {
   position: relative;
   height: 6px;
@@ -126,8 +114,6 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   background: var(--orange);
 }
 
-/* ---- Text / spacing utilities (replaces one-off inline styles) -------- */
-
 .text-muted { color: var(--grey); }
 .text-muted-dark { color: #cfcfd1; }
 .mb-0 { margin-bottom: 0; }
@@ -135,7 +121,6 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
 .section-intro { margin-bottom: 40px; }
 .max-w-sm { max-width: 640px; }
 
-/* page-header lead paragraph always gets breathing room under the h1 */
 .page-header .lead { margin-top: 16px; }
 
 /* ---- Buttons ------------------------------------------------------- */
@@ -185,134 +170,7 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
 
 .btn-row { display: flex; gap: 16px; flex-wrap: wrap; }
 
-/* ---- Site header / nav ------------------------------------------------ */
-
-.site-header {
-  background: var(--black-deep);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.site-header .wrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 76px;
-}
-
-.logo {
-  font-family: var(--font-head);
-  font-weight: 800;
-  font-size: 1.4rem;
-  color: var(--white);
-  letter-spacing: 0.3px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo span { color: var(--orange); }
-
-.logo-mark {
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-}
-
-.nav-links {
-  display: flex;
-  gap: 36px;
-}
-
-.nav-links a {
-  font-family: var(--font-head);
-  font-weight: 600;
-  font-size: 1.05rem;
-  color: var(--white);
-  padding: 6px 0;
-  border-bottom: 3px solid transparent;
-}
-
-.nav-links a:hover,
-.nav-links a[aria-current="page"] {
-  border-bottom-color: var(--orange);
-}
-
-/* groups the call button + hamburger on the right of the header */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.header-phone {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 0.98rem;
-  color: var(--white);
-  border: 2px solid var(--orange);
-  padding: 8px 16px;
-  white-space: nowrap;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.header-phone svg { width: 16px; height: 16px; flex-shrink: 0; }
-
-.header-phone:hover, .header-phone:focus-visible {
-  background: var(--orange);
-  color: var(--white);
-}
-
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--white);
-  cursor: pointer;
-  padding: 8px;
-}
-
-.nav-toggle svg { width: 26px; height: 26px; }
-
-@media (max-width: 800px) {
-  .nav-toggle { display: block; }
-
-  .nav-links {
-    position: absolute;
-    top: 76px;
-    left: 0;
-    right: 0;
-    background: var(--black-deep);
-    flex-direction: column;
-    gap: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.25s ease;
-  }
-
-  .nav-links.is-open { max-height: 320px; }
-
-  .nav-links a {
-    display: block;
-    padding: 16px var(--gutter);
-    border-bottom: 1px solid #2a2b2d;
-  }
-
-  .nav-links a[aria-current="page"],
-  .nav-links a:hover {
-    border-bottom-color: #2a2b2d;
-    background: var(--black);
-  }
-}
-
-@media (max-width: 420px) {
-  .header-phone span.phone-label { display: none; }
-  .header-phone { padding: 8px 10px; }
-}
+/* NOTE: site-header / nav / skip-link styles moved to _includes/header.njk */
 
 /* ---- Trust bar ------------------------------------------------------- */
 
@@ -355,10 +213,7 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   overflow: hidden;
 }
 
-.hero .wrap {
-  position: relative;
-  z-index: 1;
-}
+.hero .wrap { position: relative; z-index: 1; }
 
 .hero-eyebrow {
   color: var(--orange);
@@ -368,10 +223,7 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   margin-bottom: 18px;
 }
 
-.hero h1 {
-  max-width: 14ch;
-  animation: hero-rise 0.6s ease both;
-}
+.hero h1 { max-width: 14ch; animation: hero-rise 0.6s ease both; }
 
 .hero p.lead {
   font-size: 1.2rem;
@@ -421,7 +273,6 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   background: var(--grey-light);
 }
 
-/* modifier: bordered tiles on an off-white page background (Services page) */
 .grid--bordered {
   background: var(--off-white);
   gap: 24px;
@@ -441,7 +292,6 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
 .tile:hover { border-top-color: var(--orange); }
 
 .tile h3 { margin-bottom: 12px; }
-
 .tile p { margin-bottom: 18px; color: #4d4d4f; }
 
 .tile-link {
@@ -536,29 +386,63 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
 
 .reviews-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  margin-top: 36px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 40px;
+}
+
+@media (max-width: 900px) {
+  .reviews-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+}
+
+@media (max-width: 560px) {
+  .reviews-grid { grid-template-columns: 1fr; gap: 20px; }
 }
 
 .review-card {
   background: var(--black-deep);
-  padding: 28px;
-  border-left: 4px solid var(--orange);
+  border-radius: 12px;
+  padding: 30px 28px 26px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.review-card .quote-mark {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--orange);
+  opacity: 0.3;
+  margin-bottom: -8px;
+  display: block;
+  font-weight: 700;
 }
 
 .review-stars {
-  color: var(--orange);
+  color: #f5b342;
   letter-spacing: 2px;
+  font-size: 1.05rem;
   margin-bottom: 12px;
-  font-size: 1rem;
+  display: flex;
+  gap: 2px;
 }
 
+.review-stars span { display: inline-block; }
+
 .review-card blockquote {
-  margin: 0 0 16px;
-  font-size: 1.01rem;
+  margin: 0 0 18px;
+  font-size: 1.02rem;
   color: #e7e7e8;
-  line-height: 1.5;
+  line-height: 1.6;
+  flex: 1;
 }
 
 .review-card cite {
@@ -566,20 +450,36 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   font-style: normal;
   font-family: var(--font-head);
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   color: var(--white);
+  margin-top: 4px;
 }
 
 .review-source {
   display: block;
   color: var(--grey);
-  font-size: 0.85rem;
-  margin-top: 4px;
+  font-size: 0.82rem;
+  margin-top: 2px;
+  letter-spacing: 0.2px;
+}
+
+.review-badge {
+  display: inline-block;
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 2px 12px;
+  border-radius: 20px;
+  align-self: flex-start;
+  margin-bottom: 14px;
 }
 
 .reviews-cta { margin-top: 32px; }
 
-/* single testimonial variant (used where only one quote is shown) */
 .testimonial {
   border-left: 6px solid var(--orange);
   padding-left: 28px;
@@ -594,10 +494,7 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   color: var(--white);
 }
 
-.testimonial cite {
-  font-style: normal;
-  color: var(--grey);
-}
+.testimonial cite { font-style: normal; color: var(--grey); }
 
 /* ---- Contact ------------------------------------------------------- */
 
@@ -615,7 +512,6 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
 }
 
 .contact-card h3 { margin-bottom: 6px; }
-
 .contact-card p.hint { color: var(--grey); margin-bottom: 0; }
 
 .contact-card a.big-link {
@@ -651,7 +547,6 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
 }
 
 .cta-band h2 { color: var(--white); margin-bottom: 8px; }
-
 .cta-band .subtext { color: rgba(255, 255, 255, 0.85); margin: 0; }
 
 .cta-band .wrap {
@@ -662,71 +557,10 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   gap: 24px;
 }
 
-.cta-band .btn {
-  background: var(--black);
-  border-color: var(--black);
-}
+.cta-band .btn { background: var(--black); border-color: var(--black); }
+.cta-band .btn:hover { background: transparent; color: var(--black); }
 
-.cta-band .btn:hover {
-  background: transparent;
-  color: var(--black);
-}
-
-/* ---- Footer ------------------------------------------------------- */
-
-.site-footer {
-  background: var(--black-deep);
-  color: #b9b9bb;
-  padding: 64px 0 32px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 40px;
-  padding-bottom: 40px;
-  border-bottom: 1px solid #232426;
-}
-
-@media (max-width: 700px) {
-  .footer-grid { grid-template-columns: 1fr; }
-}
-
-.footer-grid h4 {
-  font-family: var(--font-head);
-  color: var(--white);
-  font-size: 1.05rem;
-  margin-bottom: 16px;
-}
-
-.footer-tagline { max-width: 40ch; }
-
-.footer-grid ul li { margin-bottom: 10px; }
-.footer-grid a:hover { color: var(--orange); }
-
-.footer-bottom {
-  padding-top: 24px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-size: 0.9rem;
-}
-
-.footer-logo {
-  font-family: var(--font-head);
-  font-weight: 800;
-  color: var(--white);
-  font-size: 1.3rem;
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.footer-logo span { color: var(--orange); }
-
-.footer-logo img { width: 28px; height: 28px; flex-shrink: 0; }
+/* NOTE: footer styles moved to _includes/footer.njk */
 
 /* ---- Media / image loader (skeleton shimmer -> fade in) --------------- */
 
@@ -771,7 +605,6 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   100% { background-position: -20% 0; }
 }
 
-/* service icon tiles — dark tile with a centred line-icon */
 .icon-tile {
   aspect-ratio: 16 / 9;
   background: var(--black);
@@ -789,11 +622,13 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
 }
 
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
 }
 
 .reveal-group > *:nth-child(2) { transition-delay: 0.08s; }
@@ -801,19 +636,10 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
 .reveal-group > *:nth-child(4) { transition-delay: 0.24s; }
 .reveal-group > *:nth-child(5) { transition-delay: 0.32s; }
 
-/* No-JS fallback: if JavaScript never runs, .reveal elements must still
-   be visible rather than permanently stuck at opacity:0. script.js adds
-   .is-visible via IntersectionObserver, but this covers the edge case of
-   JS failing to load at all after CSS has already applied. */
 .no-js .reveal {
   opacity: 1;
   transform: none;
 }
-
-
-/* ==========================================================================
-   NEW — Enhanced “What We Do” service cards & testimonial cards
-   ========================================================================== */
 
 /* ---- What We Do — modern service cards --------------------------- */
 
@@ -825,17 +651,11 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
 }
 
 @media (max-width: 900px) {
-  .service-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
+  .service-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
 }
 
 @media (max-width: 560px) {
-  .service-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+  .service-grid { grid-template-columns: 1fr; gap: 20px; }
 }
 
 .service-card {
@@ -854,9 +674,7 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
 .service-card::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: 4px;
   background: var(--orange);
   transform: scaleX(0);
@@ -869,9 +687,7 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   box-shadow: 0 12px 32px rgba(15, 16, 17, 0.12);
 }
 
-.service-card:hover::after {
-  transform: scaleX(1);
-}
+.service-card:hover::after { transform: scaleX(1); }
 
 .service-icon {
   width: 68px;
@@ -930,144 +746,19 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   border-color: var(--orange-dark);
 }
 
-/* ---- What Our Customers Say — enhanced testimonial cards ---------- */
-
-/* override the original .reviews-grid with a cleaner 3-col layout */
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-  margin-top: 40px;
-}
-
-@media (max-width: 900px) {
-  .reviews-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-}
-
-@media (max-width: 560px) {
-  .reviews-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-}
-
-.review-card {
-  background: var(--black-deep);
-  border-radius: 12px;
-  padding: 30px 28px 26px;
-  border-left: none;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-  transition: transform 0.25s ease, box-shadow 0.3s ease;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-.review-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-}
-
-.review-card .quote-mark {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 2.8rem;
-  line-height: 1;
-  color: var(--orange);
-  opacity: 0.3;
-  margin-bottom: -8px;
-  display: block;
-  font-weight: 700;
-}
-
-.review-stars {
-  color: #f5b342;
-  letter-spacing: 2px;
-  font-size: 1.05rem;
-  margin-bottom: 12px;
-  display: flex;
-  gap: 2px;
-}
-
-.review-stars span {
-  display: inline-block;
-}
-
-.review-card blockquote {
-  margin: 0 0 18px;
-  font-size: 1.02rem;
-  color: #e7e7e8;
-  line-height: 1.6;
-  flex: 1;
-}
-
-.review-card cite {
-  display: block;
-  font-style: normal;
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 1.08rem;
-  color: var(--white);
-  margin-top: 4px;
-}
-
-.review-source {
-  display: block;
-  color: var(--grey);
-  font-size: 0.82rem;
-  margin-top: 2px;
-  letter-spacing: 0.2px;
-}
-
-.review-badge {
-  display: inline-block;
-  background: var(--orange);
-  color: var(--white);
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 0.7rem;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  padding: 2px 12px;
-  border-radius: 20px;
-  align-self: flex-start;
-  margin-bottom: 14px;
-}
-
 @media (max-width: 640px) {
-  .service-card {
-    padding: 24px 20px 22px;
-  }
-  .service-icon {
-    width: 56px;
-    height: 56px;
-  }
-  .service-icon img {
-    width: 26px;
-    height: 26px;
-  }
-  .service-card h3 {
-    font-size: 1.2rem;
-  }
-  .review-card {
-    padding: 24px 20px 22px;
-  }
-  .review-card .quote-mark {
-    font-size: 2.2rem;
-  }
-  .review-card blockquote {
-    font-size: 0.95rem;
-  }
+  .service-card { padding: 24px 20px 22px; }
+  .service-icon { width: 56px; height: 56px; }
+  .service-icon img { width: 26px; height: 26px; }
+  .service-card h3 { font-size: 1.2rem; }
+  .review-card { padding: 24px 20px 22px; }
+  .review-card .quote-mark { font-size: 2.2rem; }
+  .review-card blockquote { font-size: 0.95rem; }
 }
-
 
 /* ==========================================================================
    QUOTE PAGE — Form & review stats styles
    ========================================================================== */
-
-/* ---- Form styles --------------------------------------------------- */
 
 .form-group { margin-bottom: 20px; }
 .form-group label {
@@ -1125,8 +816,6 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   margin-bottom: 24px;
 }
 .form-error.is-visible { display: block; }
-
-/* ---- Review stats (quote page) ------------------------------------- */
 
 .review-stats {
   display: flex;

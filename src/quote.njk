@@ -7,10 +7,236 @@ description: "Request a free quote for transport, heavy handling, residential mo
 <html lang="en">
 <head>
   {% include "head.njk" %}
+
+  <style>
+    /* ==========================================================================
+       Quote page — self-contained styles
+       ========================================================================== */
+
+    .quote-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .quote-layout { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ---- Form submit button ---------------------------------------- */
+
+    .quote-submit {
+      width: 100%;
+      text-align: center;
+      font-size: 1.2rem;
+      padding: 18px 30px;
+      margin-top: 8px;
+    }
+
+    .quote-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .quote-note {
+      font-size: 0.8rem;
+      color: var(--grey);
+      margin: 12px 0 0;
+      text-align: center;
+      max-width: 100%;
+    }
+
+    /* ---- Info column ----------------------------------------------- */
+
+    .info-block {
+      margin-bottom: 40px;
+    }
+
+    .info-block h2 {
+      font-size: 1.6rem;
+      margin-bottom: 24px;
+    }
+
+    /* Numbered steps */
+
+    .next-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .next-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 20px;
+      background: var(--white);
+      border: 1px solid var(--grey-light);
+      border-radius: 10px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .next-step:hover {
+      border-color: var(--orange);
+      transform: translateX(3px);
+    }
+
+    .next-step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--black);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .next-step:hover .next-step-num {
+      background: var(--orange);
+    }
+
+    .next-step p {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--black);
+      line-height: 1.5;
+      max-width: 100%;
+    }
+
+    /* Prefer to call card */
+
+    .call-card {
+      padding: 24px 26px;
+      background: var(--off-white);
+      border-left: 4px solid var(--orange);
+      border-radius: 0 10px 10px 0;
+    }
+
+    .call-card h3 {
+      font-size: 1.15rem;
+      margin: 0 0 10px;
+    }
+
+    .call-card a {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--black);
+      border-bottom: 3px solid var(--orange);
+      padding-bottom: 2px;
+      transition: color 0.2s ease;
+    }
+
+    .call-card a:hover {
+      color: var(--orange);
+    }
+
+    .call-card .hours {
+      color: var(--grey);
+      font-size: 0.9rem;
+      margin: 10px 0 0;
+    }
+
+    /* ---- Reviews summary ------------------------------------------ */
+
+    .reviews-summary {
+      padding-top: 32px;
+      border-top: 2px solid var(--grey-light);
+    }
+
+    .reviews-summary h3 {
+      font-size: 1.15rem;
+      margin: 0 0 16px;
+    }
+
+    /* Stars */
+
+    .review-stars {
+      display: flex;
+      gap: 3px;
+      color: #f5b342;
+      font-size: 1.5rem;
+      line-height: 1;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    /* Rating number + source */
+
+    .review-rating {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .review-rating .rating-num {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 2.4rem;
+      line-height: 1;
+      color: var(--orange);
+      letter-spacing: 0.5px;
+    }
+
+    .review-rating .rating-out {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--grey);
+    }
+
+    .review-rating .rating-source {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--grey);
+      margin-left: 4px;
+    }
+
+    /* Caption + link */
+
+    .rating-caption {
+      font-size: 0.95rem;
+      color: #4d4d4f;
+      margin: 0 0 14px;
+      max-width: 100%;
+    }
+
+    .reviews-summary .read-link {
+      color: var(--orange);
+      font-size: 0.9rem;
+      text-decoration: underline;
+    }
+
+    .reviews-summary .read-link:hover { color: var(--orange-dark); }
+
+    /* Success / error messages use the existing .form-success / .form-error
+       styles defined in css/style.css */
+
+    @media (max-width: 480px) {
+      .call-card a { font-size: 1.4rem; }
+      .review-stars { font-size: 1.25rem; }
+      .review-rating .rating-num { font-size: 2rem; }
+      .review-rating .rating-out { font-size: 1.05rem; }
+      .review-rating .rating-source { font-size: 0.8rem; }
+    }
+  </style>
 </head>
 <body>
 
 {% include "header.njk" %}
+
+<!-- ====== PAGE HEADER ====== -->
 
 <section class="page-header">
   <div class="wrap">
@@ -22,9 +248,12 @@ description: "Request a free quote for transport, heavy handling, residential mo
 
 <div class="bar-divider"></div>
 
+<!-- ====== QUOTE FORM + INFO ====== -->
+
 <section class="section">
   <div class="wrap">
-    <div class="split" style="gap: 48px;">
+    <div class="quote-layout">
+
       <!-- FORM COLUMN -->
       <div>
         <!-- Success / Error messages -->
@@ -36,19 +265,16 @@ description: "Request a free quote for transport, heavy handling, residential mo
         </div>
 
         <form id="quoteForm" action="https://api.web3forms.com/submit" method="POST">
-          <!-- Web3Forms access key – replace with your own -->
+          <!-- Replace with your Web3Forms access key -->
           <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-
-          <!-- Redirect to thank-you page (optional) -->
-          <input type="hidden" name="redirect" value="https://yourdomain.com/quote/thank-you/">
 
           <!-- Bot protection (honeypot) -->
           <input type="checkbox" name="botcheck" style="display: none;">
 
-          <!-- Hidden: identify the form -->
+          <!-- Email subject line -->
           <input type="hidden" name="subject" value="New Quote Request from Antigravity Logistics">
 
-          <!-- Service selection -->
+          <!-- Service -->
           <div class="form-group">
             <label for="service">What service do you need? *</label>
             <select id="service" name="service" required>
@@ -62,6 +288,7 @@ description: "Request a free quote for transport, heavy handling, residential mo
             </select>
           </div>
 
+          <!-- Name + Email -->
           <div class="form-row">
             <div class="form-group">
               <label for="name">Your name *</label>
@@ -73,78 +300,89 @@ description: "Request a free quote for transport, heavy handling, residential mo
             </div>
           </div>
 
+          <!-- Phone -->
           <div class="form-group">
             <label for="phone">Phone number</label>
             <input type="tel" id="phone" name="phone" placeholder="0422 553 675">
           </div>
 
+          <!-- Job details -->
           <div class="form-group">
             <label for="message">Tell us about your job *</label>
             <textarea id="message" name="message" placeholder="What needs to be moved? Where from and to? Any stairs, tight access, or oversized items?" required></textarea>
           </div>
 
-          <div class="form-group">
-            <label for="pickup">Pickup suburb / postcode</label>
-            <input type="text" id="pickup" name="pickup" placeholder="e.g. Sydney, 2000">
+          <!-- Locations -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="pickup">Pickup suburb / postcode</label>
+              <input type="text" id="pickup" name="pickup" placeholder="e.g. Sydney, 2000">
+            </div>
+            <div class="form-group">
+              <label for="delivery">Delivery suburb / postcode</label>
+              <input type="text" id="delivery" name="delivery" placeholder="e.g. Parramatta, 2150">
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="delivery">Delivery suburb / postcode</label>
-            <input type="text" id="delivery" name="delivery" placeholder="e.g. Parramatta, 2150">
-          </div>
+          <!-- Submit -->
+          <button type="submit" class="btn quote-submit">Send Quote Request →</button>
 
-          <button type="submit" class="btn" style="width: 100%; text-align: center; font-size: 1.2rem;">
-            Send Quote Request →
-          </button>
-
-          <p style="font-size: 0.8rem; color: var(--grey); margin-top: 12px; text-align: center;">
-            We'll respond within 24 hours. Your details are safe with us.
-          </p>
+          <p class="quote-note">We'll respond within 24 hours. Your details are safe with us.</p>
         </form>
       </div>
 
       <!-- INFO COLUMN -->
       <div>
-        <h2>What happens next?</h2>
-        <ol style="list-style: decimal; padding-left: 20px; color: #4d4d4f; font-size: 1.05rem; line-height: 1.7;">
-          <li>We receive your request</li>
-          <li>We review the details</li>
-          <li>We get back to you with a custom plan and price</li>
-          <li>We schedule the job</li>
-        </ol>
 
-        <div style="margin-top: 32px; padding: 24px; background: var(--off-white); border-left: 4px solid var(--orange);">
-          <h3 style="font-size: 1.2rem; margin-bottom: 6px;">Prefer to call?</h3>
-          <p style="margin-bottom: 0;">
-            <a href="tel:+61422553675" style="font-family: var(--font-head); font-size: 1.6rem; font-weight: 700; color: var(--black); border-bottom: 3px solid var(--orange);">0422 553 675</a>
-          </p>
-          <p style="color: var(--grey); margin-top: 6px;">Monday – Saturday, 7am – 7pm</p>
+        <!-- What happens next -->
+        <div class="info-block">
+          <h2>What happens next</h2>
+          <ol class="next-steps">
+            <li class="next-step">
+              <span class="next-step-num">1</span>
+              <p>We receive your request and review the details.</p>
+            </li>
+            <li class="next-step">
+              <span class="next-step-num">2</span>
+              <p>We ask any follow-up questions if needed.</p>
+            </li>
+            <li class="next-step">
+              <span class="next-step-num">3</span>
+              <p>We send you a custom plan and a clear price.</p>
+            </li>
+            <li class="next-step">
+              <span class="next-step-num">4</span>
+              <p>We lock in a date and get the job done.</p>
+            </li>
+          </ol>
         </div>
 
-        <!-- ====== LIVE REVIEWS SECTION ====== -->
-        <div style="margin-top: 40px; padding-top: 32px; border-top: 2px solid var(--grey-light);">
-          <h3>What our customers say</h3>
-          <div id="reviewStats" class="review-stats">
-            <!-- Static fallback data – will be updated by JavaScript -->
-            <div class="stat">
-              <span class="stars">★★★★★</span>
-            </div>
-            <div class="stat">
-              <span class="num" id="ratingDisplay">4.9</span>
-              <span>average</span>
-            </div>
-            <div class="stat">
-              <span class="num" id="countDisplay">98</span>
-              <span>reviews</span>
-            </div>
-            <span class="source">from Google</span>
+        <!-- Prefer to call -->
+        <div class="info-block">
+          <div class="call-card">
+            <h3>Prefer to call?</h3>
+            <a href="tel:+61422553675">0422 553 675</a>
+            <p class="hours">Monday – Saturday, 7am – 7pm</p>
           </div>
-          <p style="color: var(--grey); font-size: 0.9rem; margin-top: 4px;">
-            <a href="https://www.google.com/search?q=antigravity+removals" target="_blank" rel="noopener" style="color: var(--orange); text-decoration: underline;">
-              Read all reviews on Google →
-            </a>
-          </p>
         </div>
+
+        <!-- Reviews summary -->
+        <div class="reviews-summary">
+          <h3>What our customers say</h3>
+          <div class="review-stars" aria-label="Rated 4.8 or higher out of 5">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <div class="review-rating">
+            <span class="rating-num">4.8+</span>
+            <span class="rating-out">/ 5</span>
+            <span class="rating-source">from Google</span>
+          </div>
+          <p class="rating-caption">Highly rated by customers across Sydney and NSW.</p>
+          <a href="https://www.google.com/search?q=antigravity+removals" target="_blank" rel="noopener" class="read-link">
+            Read reviews on Google →
+          </a>
+        </div>
+
       </div>
     </div>
   </div>
@@ -152,10 +390,9 @@ description: "Request a free quote for transport, heavy handling, residential mo
 
 {% include "footer.njk" %}
 
-
 <script>
 // ============================================================
-// 1. FORM HANDLING – client-side validation & submission
+// Form validation
 // ============================================================
 
 const form = document.getElementById('quoteForm');
@@ -164,11 +401,9 @@ const errorDiv = document.getElementById('formError');
 
 if (form) {
   form.addEventListener('submit', function(e) {
-    // Hide any previous messages
     successDiv.classList.remove('is-visible');
     errorDiv.classList.remove('is-visible');
 
-    // Basic validation
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const service = document.getElementById('service').value;
@@ -181,7 +416,6 @@ if (form) {
       return;
     }
 
-    // Simple email validation
     if (!email.includes('@') || !email.includes('.')) {
       errorDiv.textContent = '❌ Please enter a valid email address.';
       errorDiv.classList.add('is-visible');
@@ -189,84 +423,16 @@ if (form) {
       return;
     }
 
-    // If using Web3Forms, we let the native submit go through
-    // If you want AJAX submission instead, add code here
-    // For now: show a "sending" state if needed
     const btn = form.querySelector('button[type="submit"]');
     btn.textContent = '⏳ Sending...';
     btn.disabled = true;
 
-    // Re-enable after a timeout (in case of error)
     setTimeout(() => {
       btn.textContent = 'Send Quote Request →';
       btn.disabled = false;
     }, 5000);
   });
 }
-
-// ============================================================
-// 2. LIVE REVIEWS FROM GOOGLE PLACES API
-// ============================================================
-
-async function fetchGoogleReviews() {
-  // --- CONFIGURATION ---
-  // Get your place ID from: https://developers.google.com/maps/documentation/places/web-service/place-id
-  // Or use the search method below (automatic)
-  const PLACE_ID = 'ChIJN1t_tDeuEmsRUsoyG83frYQ'; // Antigravity Removals – you'll need to verify this
-  
-  // Option A: If you have an API key, uncomment this block and add your key
-  // const API_KEY = 'YOUR_GOOGLE_PLACES_API_KEY';
-  // const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=rating,user_ratings_total&key=${API_KEY}`;
-
-  // Option B: Use a free proxy to fetch without an API key (less reliable, but works for demo)
-  // This uses a public CORS proxy – for production, use Option A or a server-side proxy
-  const proxyUrl = 'https://api.allorigins.win/raw?url=';
-  const placeUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=rating,user_ratings_total&key=AIzaSyDummyKey_ReplaceWithYourKey`;
-  
-  // Since we can't use a real API key here, we'll fall back to static data
-  // In production, you would use your own API key with Option A
-  
-  // For this demo, we'll use static data and try to update from a free source
-  // Actually, let's just use the static data – it's more reliable than broken free proxies
-  
-  console.log('ℹ️ Reviews: Using static fallback data. To enable live updates, add your Google Places API key.');
-}
-
-// Execute on page load
-document.addEventListener('DOMContentLoaded', function() {
-  // We'll keep the static data as shown
-  // If you want to test live data, uncomment the code above and add your API key
-  
-  // The static data is already in the HTML – nothing else to do
-  console.log('✅ Reviews loaded (static fallback)');
-});
-
-// For a real implementation, here's the full code with your API key:
-/*
-async function fetchGoogleReviews() {
-  const PLACE_ID = 'ChIJN1t_tDeuEmsRUsoyG83frYQ';
-  const API_KEY = 'YOUR_GOOGLE_PLACES_API_KEY';
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=rating,user_ratings_total&key=${API_KEY}`;
-
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    
-    if (data.status === 'OK') {
-      const rating = data.result.rating || 4.9;
-      const count = data.result.user_ratings_total || 98;
-      
-      document.getElementById('ratingDisplay').textContent = rating.toFixed(1);
-      document.getElementById('countDisplay').textContent = count;
-    }
-  } catch (error) {
-    console.warn('Could not fetch live reviews:', error);
-    // Keep static fallback
-  }
-}
-
-document.addEventListener('DOMContentLoaded', fetchGoogleReviews);
-*/
 </script>
 
 </body>
