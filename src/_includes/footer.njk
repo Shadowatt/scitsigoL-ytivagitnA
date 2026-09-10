@@ -1,12 +1,39 @@
 <style>
   /* ==========================================================================
-     Footer — self-contained styles (only used inside .site-footer)
+     Footer — self-contained styles
      ========================================================================== */
 
   .site-footer {
+    position: relative;
     background: var(--black-deep);
     color: #b9b9bb;
     padding: 64px 0 32px;
+  }
+
+  /* Signature divider — mirrors the header's bottom divider.
+     On the dark footer we use a subtle grey line + the orange tab,
+     which reads as the "inverted" version of the header's treatment. */
+
+  .site-footer::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 3px;
+    background: #232426;
+    pointer-events: none;
+  }
+
+  .site-footer::after {
+    content: '';
+    position: absolute;
+    left: var(--gutter);
+    top: 0;
+    width: 56px;
+    height: 3px;
+    background: var(--orange);
+    pointer-events: none;
   }
 
   .footer-grid {
@@ -86,6 +113,8 @@
     font-size: 0.9rem;
   }
 
+  /* ---- Footer logo --------------------------------------------- */
+
   .footer-logo {
     display: inline-block;
     margin-bottom: 20px;
@@ -114,12 +143,17 @@
     .footer-logo img { width: 90px; height: 90px; }
   }
 
+  /* ---- Reduced motion ------------------------------------------ */
+
   @media (prefers-reduced-motion: reduce) {
     .footer-grid a,
     .footer-grid a svg,
     .footer-grid a::after,
     .footer-logo {
       transition: none;
+    }
+    .footer-logo:hover {
+      transform: none;
     }
   }
 </style>
