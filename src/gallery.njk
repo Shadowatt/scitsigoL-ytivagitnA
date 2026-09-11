@@ -20,19 +20,61 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
       margin: 0;
     }
 
+    /* ---- Filter tabs ---------------------------------------------- */
+
+    .gallery-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      background: transparent;
+      border: 2px solid #333;
+      border-radius: 999px;
+      color: #cfcfd1;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.2px;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--orange);
+      color: var(--white);
+    }
+
+    .filter-btn.is-active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--white);
+    }
+
+    .filter-btn .count {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      font-weight: 500;
+    }
+
+    /* ---- Masonry grid --------------------------------------------- */
+
     .gallery-grid {
       column-count: 3;
       column-gap: 20px;
-      margin-top: 40px;
+      margin-top: 32px;
     }
 
-    @media (max-width: 900px) {
-      .gallery-grid { column-count: 2; }
-    }
-
-    @media (max-width: 560px) {
-      .gallery-grid { column-count: 1; }
-    }
+    @media (max-width: 900px) { .gallery-grid { column-count: 2; } }
+    @media (max-width: 560px) { .gallery-grid { column-count: 1; } }
 
     .gallery-item {
       display: block;
@@ -42,7 +84,7 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
       overflow: hidden;
       position: relative;
       background: var(--grey-light);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
     }
 
     .gallery-item img {
@@ -54,20 +96,20 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
 
     .gallery-item:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(15, 16, 17, 0.18);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
     }
 
-    .gallery-item:hover img {
-      transform: scale(1.04);
-    }
+    .gallery-item:hover img { transform: scale(1.05); }
 
-    /* Gradient overlay + caption on hover */
+    .gallery-item.is-hidden {
+      display: none;
+    }
 
     .gallery-item::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(15,16,17,0.75) 0%, transparent 45%);
+      background: linear-gradient(to top, rgba(15,16,17,0.85) 0%, transparent 50%);
       opacity: 0;
       transition: opacity 0.3s ease;
       pointer-events: none;
@@ -79,15 +121,15 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
       position: absolute;
       left: 20px;
       right: 20px;
-      bottom: 16px;
+      bottom: 18px;
       color: var(--white);
       font-family: var(--font-head);
-      font-weight: 600;
-      font-size: 0.98rem;
+      font-weight: 700;
+      font-size: 1.05rem;
       line-height: 1.3;
-      transform: translateY(8px);
+      transform: translateY(10px);
       opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      transition: transform 0.35s ease, opacity 0.35s ease;
       z-index: 1;
       pointer-events: none;
     }
@@ -97,7 +139,23 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
       opacity: 1;
     }
 
-    /* ---- Quote band (same pattern as other pages) ---- */
+    /* Small tag pill inside the caption */
+
+    .gallery-tag {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+
+    /* ---- Quote band ------------------------------------------------ */
 
     .quote-band {
       background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
@@ -139,10 +197,7 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
     }
 
     @media (max-width: 800px) {
-      .quote-band-content {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
+      .quote-band-content { grid-template-columns: 1fr; gap: 32px; }
     }
 
     .quote-band-eyebrow {
@@ -156,11 +211,7 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
       margin-bottom: 14px;
     }
 
-    .quote-band-text h2 {
-      color: var(--white);
-      margin-bottom: 12px;
-      max-width: 22ch;
-    }
+    .quote-band-text h2 { color: var(--white); margin-bottom: 12px; max-width: 22ch; }
 
     .quote-band-text p {
       color: #cfcfd1;
@@ -195,8 +246,6 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
 
 {% include "header.njk" %}
 
-<!-- ====== PAGE HEADER ====== -->
-
 <section class="page-header">
   <div class="wrap">
     <div class="hero-eyebrow">Gallery</div>
@@ -207,101 +256,106 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
 
 <div class="bar-divider"></div>
 
-<!-- ====== GALLERY ====== -->
-
 <section class="section">
   <div class="wrap reveal">
     <h2>Recent work</h2>
-    <p class="gallery-intro">Every job is different. Here's a snapshot of the kind of work we take on.</p>
+    <p class="gallery-intro">Every job is different. Filter by category to see the kind of work we take on.</p>
+  </div>
+  <div class="wrap">
+    <div class="gallery-filters reveal">
+      <button type="button" class="filter-btn is-active" data-filter="all">All <span class="count">16</span></button>
+      <button type="button" class="filter-btn" data-filter="heavy">Heavy handling</button>
+      <button type="button" class="filter-btn" data-filter="medical">Medical</button>
+      <button type="button" class="filter-btn" data-filter="residential">Residential</button>
+      <button type="button" class="filter-btn" data-filter="disposal">Disposal</button>
+    </div>
   </div>
   <div class="wrap">
     <div class="gallery-grid">
 
-      <a href="{{ '/images/photos/2-men-with-long-yellow-item.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/2-men-with-long-yellow-item.jpeg' | url }}" target="_blank" rel="noopener" data-category="heavy" class="gallery-item reveal">
         <img src="{{ '/images/photos/2-men-with-long-yellow-item.jpeg' | url }}" alt="Two team members carrying a long yellow item" loading="lazy" decoding="async">
-        <span class="gallery-caption">Heavy handling in action</span>
+        <span class="gallery-caption"><span class="gallery-tag">Heavy handling</span><br>Heavy handling in action</span>
       </a>
 
-      <a href="{{ '/images/photos/heavy-medical-bed-carefully-moved-upstairs-without-effort.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/heavy-medical-bed-carefully-moved-upstairs-without-effort.jpeg' | url }}" target="_blank" rel="noopener" data-category="medical heavy" class="gallery-item reveal">
         <img src="{{ '/images/photos/heavy-medical-bed-carefully-moved-upstairs-without-effort.jpeg' | url }}" alt="Medical bed carefully moved upstairs" loading="lazy" decoding="async">
-        <span class="gallery-caption">Medical bed relocation</span>
+        <span class="gallery-caption"><span class="gallery-tag">Medical</span><br>Medical bed relocation</span>
       </a>
 
-      <a href="{{ '/images/photos/truck-front.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/truck-front.jpeg' | url }}" target="_blank" rel="noopener" data-category="residential" class="gallery-item reveal">
         <img src="{{ '/images/photos/truck-front.jpeg' | url }}" alt="Antigravity Logistics truck" loading="lazy" decoding="async">
-        <span class="gallery-caption">Our truck</span>
+        <span class="gallery-caption"><span class="gallery-tag">Our truck</span><br>Ready for the day</span>
       </a>
 
-      <a href="{{ '/images/photos/wrapped-couch.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/wrapped-couch.jpeg' | url }}" target="_blank" rel="noopener" data-category="residential" class="gallery-item reveal">
         <img src="{{ '/images/photos/wrapped-couch.jpeg' | url }}" alt="Couch wrapped in protective film" loading="lazy" decoding="async">
-        <span class="gallery-caption">Furniture wrapped with care</span>
+        <span class="gallery-caption"><span class="gallery-tag">Residential</span><br>Furniture wrapped with care</span>
       </a>
 
-      <a href="{{ '/images/photos/full-truck-of-medical-creates.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/full-truck-of-medical-creates.jpeg' | url }}" target="_blank" rel="noopener" data-category="medical" class="gallery-item reveal">
         <img src="{{ '/images/photos/full-truck-of-medical-creates.jpeg' | url }}" alt="Truck loaded with medical crates" loading="lazy" decoding="async">
-        <span class="gallery-caption">Medical equipment transport</span>
+        <span class="gallery-caption"><span class="gallery-tag">Medical</span><br>Medical equipment transport</span>
       </a>
 
-      <a href="{{ '/images/photos/assembling-table-bottom.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/assembling-table-bottom.jpeg' | url }}" target="_blank" rel="noopener" data-category="residential" class="gallery-item reveal">
         <img src="{{ '/images/photos/assembling-table-bottom.jpeg' | url }}" alt="Assembling a table during a move" loading="lazy" decoding="async">
-        <span class="gallery-caption">On-site assembly</span>
+        <span class="gallery-caption"><span class="gallery-tag">Residential</span><br>On-site assembly</span>
       </a>
 
-      <a href="{{ '/images/photos/full-truck-resident-move.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/full-truck-resident-move.jpeg' | url }}" target="_blank" rel="noopener" data-category="residential" class="gallery-item reveal">
         <img src="{{ '/images/photos/full-truck-resident-move.jpeg' | url }}" alt="Truck loaded for a residential move" loading="lazy" decoding="async">
-        <span class="gallery-caption">Residential move loaded</span>
+        <span class="gallery-caption"><span class="gallery-tag">Residential</span><br>Move loaded and ready</span>
       </a>
 
-      <a href="{{ '/images/photos/wrapping-with-see-though-wrap.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/wrapping-with-see-though-wrap.jpeg' | url }}" target="_blank" rel="noopener" data-category="residential" class="gallery-item reveal">
         <img src="{{ '/images/photos/wrapping-with-see-though-wrap.jpeg' | url }}" alt="Wrapping furniture with stretch film" loading="lazy" decoding="async">
-        <span class="gallery-caption">Protective wrapping</span>
+        <span class="gallery-caption"><span class="gallery-tag">Residential</span><br>Protective wrapping</span>
       </a>
 
-      <a href="{{ '/images/photos/truck-back-ready-to-load-with-ramp.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/truck-back-ready-to-load-with-ramp.jpeg' | url }}" target="_blank" rel="noopener" data-category="residential" class="gallery-item reveal">
         <img src="{{ '/images/photos/truck-back-ready-to-load-with-ramp.jpeg' | url }}" alt="Truck back with ramp ready to load" loading="lazy" decoding="async">
-        <span class="gallery-caption">Ramp ready to load</span>
+        <span class="gallery-caption"><span class="gallery-tag">Loading</span><br>Ramp ready to load</span>
       </a>
 
-      <a href="{{ '/images/photos/carefull-bedframe-removal-to-upstairs.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/carefull-bedframe-removal-to-upstairs.jpeg' | url }}" target="_blank" rel="noopener" data-category="heavy" class="gallery-item reveal">
         <img src="{{ '/images/photos/carefull-bedframe-removal-to-upstairs.jpeg' | url }}" alt="Careful bedframe removal to upstairs" loading="lazy" decoding="async">
-        <span class="gallery-caption">Careful bedframe removal</span>
+        <span class="gallery-caption"><span class="gallery-tag">Heavy handling</span><br>Careful bedframe removal</span>
       </a>
 
-      <a href="{{ '/images/photos/stuff-in-the-truck-wrapped-by-blankets.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/stuff-in-the-truck-wrapped-by-blankets.jpeg' | url }}" target="_blank" rel="noopener" data-category="residential" class="gallery-item reveal">
         <img src="{{ '/images/photos/stuff-in-the-truck-wrapped-by-blankets.jpeg' | url }}" alt="Items wrapped in blankets inside the truck" loading="lazy" decoding="async">
-        <span class="gallery-caption">Wrapped in blankets</span>
+        <span class="gallery-caption"><span class="gallery-tag">Residential</span><br>Wrapped in blankets</span>
       </a>
 
-      <a href="{{ '/images/photos/medical-crates-with-beds-in-the-truck.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/medical-crates-with-beds-in-the-truck.jpeg' | url }}" target="_blank" rel="noopener" data-category="medical" class="gallery-item reveal">
         <img src="{{ '/images/photos/medical-crates-with-beds-in-the-truck.jpeg' | url }}" alt="Medical crates and beds loaded in the truck" loading="lazy" decoding="async">
-        <span class="gallery-caption">Medical crates secured</span>
+        <span class="gallery-caption"><span class="gallery-tag">Medical</span><br>Medical crates secured</span>
       </a>
 
-      <a href="{{ '/images/photos/deporting-bed-medical-crates-out-of-the-truck.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/deporting-bed-medical-crates-out-of-the-truck.jpeg' | url }}" target="_blank" rel="noopener" data-category="medical" class="gallery-item reveal">
         <img src="{{ '/images/photos/deporting-bed-medical-crates-out-of-the-truck.jpeg' | url }}" alt="Unloading medical crates from the truck" loading="lazy" decoding="async">
-        <span class="gallery-caption">Unloading medical crates</span>
+        <span class="gallery-caption"><span class="gallery-tag">Medical</span><br>Unloading medical crates</span>
       </a>
 
-      <a href="{{ '/images/photos/deporting-bed-medical-crates-out-of-the-truck-2.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/deporting-bed-medical-crates-out-of-the-truck-2.jpeg' | url }}" target="_blank" rel="noopener" data-category="medical" class="gallery-item reveal">
         <img src="{{ '/images/photos/deporting-bed-medical-crates-out-of-the-truck-2.jpeg' | url }}" alt="Unloading medical crates from the truck — another view" loading="lazy" decoding="async">
-        <span class="gallery-caption">Careful unloading</span>
+        <span class="gallery-caption"><span class="gallery-tag">Medical</span><br>Careful unloading</span>
       </a>
 
-      <a href="{{ '/images/photos/mattress-in-the-truck-and-stuff.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/mattress-in-the-truck-and-stuff.jpeg' | url }}" target="_blank" rel="noopener" data-category="residential" class="gallery-item reveal">
         <img src="{{ '/images/photos/mattress-in-the-truck-and-stuff.jpeg' | url }}" alt="Mattress and boxes in the truck" loading="lazy" decoding="async">
-        <span class="gallery-caption">Mattress protected in transit</span>
+        <span class="gallery-caption"><span class="gallery-tag">Residential</span><br>Mattress protected in transit</span>
       </a>
 
-      <a href="{{ '/images/photos/rubbish-from-crates-medical-beds.jpeg' | url }}" target="_blank" rel="noopener" class="gallery-item reveal">
+      <a href="{{ '/images/photos/rubbish-from-crates-medical-beds.jpeg' | url }}" target="_blank" rel="noopener" data-category="disposal" class="gallery-item reveal">
         <img src="{{ '/images/photos/rubbish-from-crates-medical-beds.jpeg' | url }}" alt="Rubbish removal from medical crates" loading="lazy" decoding="async">
-        <span class="gallery-caption">Disposal &amp; removal</span>
+        <span class="gallery-caption"><span class="gallery-tag">Disposal</span><br>Rubbish removal</span>
       </a>
 
     </div>
   </div>
 </section>
-
-<!-- ====== QUOTE BAND ====== -->
 
 <section class="quote-band">
   <div class="wrap">
@@ -319,6 +373,33 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
 </section>
 
 {% include "footer.njk" %}
+
+<script>
+// ---- Gallery filter tabs ------------------------------------------
+
+(function () {
+  var buttons = document.querySelectorAll('.filter-btn');
+  var items = document.querySelectorAll('.gallery-item');
+  if (!buttons.length || !items.length) return;
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var filter = btn.getAttribute('data-filter');
+
+      // Active state
+      buttons.forEach(function (b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+
+      // Show/hide items
+      items.forEach(function (item) {
+        var cats = (item.getAttribute('data-category') || '').split(' ');
+        var show = (filter === 'all') || cats.indexOf(filter) !== -1;
+        item.classList.toggle('is-hidden', !show);
+      });
+    });
+  });
+})();
+</script>
 
 </body>
 </html>

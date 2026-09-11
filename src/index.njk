@@ -13,12 +13,259 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
        Homepage — self-contained styles
        ========================================================================== */
 
+    /* ---- Hero enhancements ------------------------------------------ */
+
     .hero .btn-row {
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
       align-items: center;
     }
+
+    /* Radial glow + subtle diagonal stripes overlay */
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 75% 30%, rgba(255, 80, 51, 0.13) 0%, transparent 55%),
+        radial-gradient(circle at 15% 85%, rgba(255, 80, 51, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero p.lead {
+      max-width: 54ch;
+    }
+
+    /* ---- Trust bar — proper padding + no review count --------------- */
+
+    .trust-bar .wrap {
+      padding: 26px var(--gutter);
+    }
+
+    @media (max-width: 640px) {
+      .trust-bar .wrap {
+        padding: 22px var(--gutter);
+        gap: 14px 24px;
+      }
+    }
+
+    /* ---- "More than removals" — pill list --------------------------- */
+
+    .about-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+
+    .about-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--off-white);
+      border: 1px solid var(--grey-light);
+      border-radius: 999px;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--black);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .about-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .about-pill:hover {
+      border-color: var(--orange);
+      background: var(--white);
+    }
+
+    /* ---- What We Do — bento grid ------------------------------------ */
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .service-grid { grid-template-columns: 1fr; }
+    }
+
+    /* First card spans 2 columns on desktop */
+
+    .service-grid .service-card:first-child {
+      grid-column: span 2;
+    }
+
+    @media (max-width: 900px) {
+      .service-grid .service-card:first-child { grid-column: span 2; }
+    }
+
+    @media (max-width: 560px) {
+      .service-grid .service-card:first-child { grid-column: span 1; }
+    }
+
+    /* Feature styling for the big card */
+
+    .service-grid .service-card:first-child h3 {
+      font-size: 1.7rem;
+    }
+
+    .service-grid .service-card:first-child p {
+      font-size: 1.02rem;
+      max-width: 60ch;
+    }
+
+    .service-grid .service-card:first-child .service-icon {
+      width: 88px;
+      height: 88px;
+    }
+
+    .service-grid .service-card:first-child .service-icon img {
+      width: 42px;
+      height: 42px;
+    }
+
+    /* ---- How It Works — horizontal timeline ------------------------- */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+      position: relative;
+      background: transparent;
+    }
+
+    /* Dotted connecting line behind the numbers (desktop only) */
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 44px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 2px;
+      background: repeating-linear-gradient(
+        to right,
+        var(--orange) 0,
+        var(--orange) 6px,
+        transparent 6px,
+        transparent 14px
+      );
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    .step {
+      background: transparent;
+      padding: 0 12px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.25s ease;
+    }
+
+    .step:hover {
+      transform: translateY(-4px);
+    }
+
+    .step-num {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 3px solid var(--orange);
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 2.4rem;
+      line-height: 1;
+      margin: 0 auto 22px;
+      position: relative;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+      box-shadow: 0 6px 20px rgba(15, 16, 17, 0.06);
+    }
+
+    .step:hover .step-num {
+      background: var(--orange);
+      color: var(--white);
+      transform: scale(1.05);
+    }
+
+    .step h3 {
+      font-size: 1.25rem;
+      margin: 0 0 8px;
+    }
+
+    .step p {
+      font-size: 0.95rem;
+      color: #4d4d4f;
+      margin: 0 auto;
+      max-width: 22ch;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 800px) {
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        margin-top: 40px;
+      }
+
+      .steps::before {
+        top: 44px;
+        bottom: 44px;
+        left: 44px;
+        right: auto;
+        width: 2px;
+        height: auto;
+        background: repeating-linear-gradient(
+          to bottom,
+          var(--orange) 0,
+          var(--orange) 6px,
+          transparent 6px,
+          transparent 14px
+        );
+      }
+
+      .step {
+        display: flex;
+        align-items: flex-start;
+        gap: 24px;
+        text-align: left;
+        padding: 0;
+      }
+
+      .step-num {
+        margin: 0;
+        flex-shrink: 0;
+      }
+
+      .step p { margin: 0; max-width: 100%; }
+      .step h3 { margin-bottom: 6px; }
+    }
+
+    /* ---- Quote band ------------------------------------------------- */
 
     .quote-band {
       background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
@@ -60,10 +307,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
     }
 
     @media (max-width: 800px) {
-      .quote-band-content {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
+      .quote-band-content { grid-template-columns: 1fr; gap: 32px; }
     }
 
     .quote-band-eyebrow {
@@ -111,17 +355,142 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       .quote-band-text h2 { font-size: 1.8rem; }
     }
 
+    /* ---- Reviews section ------------------------------------------- */
+
     .reviews-sub {
       color: #cfcfd1;
       font-size: 1.05rem;
       margin: 0 0 8px;
       max-width: 52ch;
     }
+
+    .section--darker .review-card {
+      background: #1e1f22;
+      border-left: 4px solid var(--orange);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .section--darker .review-card:hover {
+      background: #24262a;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Make the reviews grid 3 cols on desktop, but allow a CTA card at the end */
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .reviews-grid { grid-template-columns: 1fr; }
+    }
+
+    /* "Read all reviews" CTA card — styled like a review card */
+
+    .review-card--cta {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #1e1f22 0%, #26282c 100%);
+      border-left: 4px solid var(--orange);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .review-card--cta::after {
+      content: '';
+      position: absolute;
+      right: -60px;
+      bottom: -60px;
+      width: 200px;
+      height: 200px;
+      background: var(--orange);
+      opacity: 0.08;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .review-card--cta .review-badge {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .review-card--cta .cta-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--orange);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .review-card--cta:hover .cta-icon {
+      transform: scale(1.08) rotate(-4deg);
+    }
+
+    .review-card--cta .cta-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .review-card--cta h3 {
+      font-family: var(--font-head);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 0 0 8px;
+      line-height: 1.2;
+    }
+
+    .review-card--cta p {
+      color: #9a9a9d;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0 0 20px;
+      max-width: 100%;
+    }
+
+    .review-card--cta .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--orange);
+      margin-top: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .review-card--cta .cta-link::after {
+      content: '→';
+      transition: transform 0.25s ease;
+    }
+
+    .review-card--cta:hover .cta-link::after {
+      transform: translateX(4px);
+    }
   </style>
 </head>
 <body>
 
 {% include "header.njk" %}
+
+<!-- ====== HERO ====== -->
 
 <section class="hero">
   <div class="hero-mark"></div>
@@ -136,26 +505,29 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
   </div>
 </section>
 
+<!-- ====== TRUST BAR ====== -->
+
 <section class="trust-bar">
   <div class="wrap">
     <div class="trust-item"><span class="num">✓</span> Fully Insured</div>
     <div class="trust-item"><span class="num">10+</span> Years Industry Experience</div>
     <div class="trust-item"><span class="num">5+</span> Years Serving Sydney</div>
-    <div class="trust-item"><span class="num">5★</span> 98 Google Reviews</div>
+    <div class="trust-item"><span class="num">5★</span> Top-rated by customers</div>
   </div>
 </section>
 
 <div class="bar-divider"></div>
 
-<!-- ====== ABOUT SPLIT — now with real photo ====== -->
+<!-- ====== ABOUT SPLIT ====== -->
 
 <section class="section">
   <div class="wrap split">
     <div class="reveal">
       <h2>More than removals. More ways to move.</h2>
       <p>Antigravity Logistics has grown from a residential moving business into a broader transport, logistics and heavy-handling company.</p>
-      <p>We provide reliable transport and handling solutions for businesses, organisations, contractors and private customers across Sydney and NSW — from furniture and household items to heavy equipment, commercial goods and specialist equipment.</p>
-      <p>Our team can assist with transport, loading, unloading, positioning, assembly, disassembly and disposal.</p>
+      <p>We provide reliable transport and handling solutions for businesses, organisations, contractors and private customers across Sydney and NSW.</p>
+
+      
       <a href="{{ '/whats-included/' | url }}" class="tile-link">See what's included →</a>
     </div>
     <div class="media reveal">
@@ -164,7 +536,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
   </div>
 </section>
 
-<!-- ====== WHAT WE DO ====== -->
+<!-- ====== WHAT WE DO — bento grid ====== -->
 
 <section class="section section--dark">
   <div class="wrap reveal">
@@ -173,66 +545,80 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
   </div>
   <div class="wrap">
     <div class="service-grid reveal-group">
+
       <div class="service-card reveal">
         <div class="service-icon"><img src="{{ '/images/icon-transport.svg' | url }}" alt="" loading="lazy"></div>
         <h3>Transport &amp; Logistics</h3>
-        <p>Reliable transport for furniture, boxes, crates, pallets, commercial goods, equipment and bulky items.</p>
+        <p>Reliable transport for furniture, boxes, crates, pallets, commercial goods, equipment and bulky items — across Sydney and NSW, one item or a full load.</p>
         <a href="{{ '/services/' | url }}" class="tile-link">Learn more →</a>
       </div>
+
       <div class="service-card reveal">
         <div class="service-icon"><img src="{{ '/images/icon-heavy-handling.svg' | url }}" alt="" loading="lazy"></div>
         <h3>Heavy Handling</h3>
         <p>Safe, efficient handling of heavy and oversized items — loading, unloading and positioning.</p>
         <a href="{{ '/services/' | url }}" class="tile-link">Learn more →</a>
       </div>
+
       <div class="service-card reveal">
         <div class="service-icon"><img src="{{ '/images/icon-medical.svg' | url }}" alt="" loading="lazy"></div>
         <h3>Hospital &amp; Medical</h3>
         <p>Careful transport, relocation and positioning of hospital and medical equipment for facilities.</p>
         <a href="{{ '/services/' | url }}" class="tile-link">Learn more →</a>
       </div>
+
       <div class="service-card reveal">
         <div class="service-icon"><img src="{{ '/images/icon-residential.svg' | url }}" alt="" loading="lazy"></div>
         <h3>Residential Moves</h3>
         <p>Professional house and apartment moves, including packing and heavy-item handling.</p>
         <a href="{{ '/services/' | url }}" class="tile-link">Learn more →</a>
       </div>
+
       <div class="service-card reveal">
         <div class="service-icon"><img src="{{ '/images/icon-disposal.svg' | url }}" alt="" loading="lazy"></div>
         <h3>Disposal &amp; Removal</h3>
         <p>Removal and disposal of unwanted furniture, equipment and general rubbish.</p>
         <a href="{{ '/services/' | url }}" class="tile-link">Learn more →</a>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ====== HOW IT WORKS ====== -->
+<!-- ====== HOW IT WORKS — timeline ====== -->
 
 <section class="section">
   <div class="wrap">
     <h2 class="reveal">How It Works</h2>
-    <p class="reveal">A simple, four-step process from first contact to job done.</p>
+    <p class="reveal" style="max-width:52ch;">A simple, four-step process from first contact to job done.</p>
     <div class="steps reveal-group">
       <div class="step reveal">
         <span class="step-num">1</span>
-        <h3>Get in touch</h3>
-        <p>Call, email or message us with a few details about the job.</p>
+        <div>
+          <h3>Get in touch</h3>
+          <p>Call, email or message us with a few details about the job.</p>
+        </div>
       </div>
       <div class="step reveal">
         <span class="step-num">2</span>
-        <h3>Get a quote</h3>
-        <p>We ask a few questions and come back with a straight answer on price.</p>
+        <div>
+          <h3>Get a quote</h3>
+          <p>We ask a few questions and come back with a straight answer on price.</p>
+        </div>
       </div>
       <div class="step reveal">
         <span class="step-num">3</span>
-        <h3>Schedule</h3>
-        <p>We lock in a date and time that works for you.</p>
+        <div>
+          <h3>Schedule</h3>
+          <p>We lock in a date and time that works for you.</p>
+        </div>
       </div>
       <div class="step reveal">
         <span class="step-num">4</span>
-        <h3>Job done</h3>
-        <p>Our team handles it professionally, start to finish.</p>
+        <div>
+          <h3>Job done</h3>
+          <p>Our team handles it professionally, start to finish.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -260,8 +646,10 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
 <section class="section section--darker">
   <div class="wrap">
     <h2 class="reveal">What Our Customers Say</h2>
-    <p class="reviews-sub reveal">Rated 5/5 across 98 Google reviews and 28 hipages reviews.</p>
+    <p class="reviews-sub reveal">Rated 5/5 by customers across Sydney and NSW.</p>
+
     <div class="reviews-grid reveal-group">
+
       <div class="review-card reveal">
         <span class="review-badge">Google</span>
         <span class="quote-mark">&ldquo;</span>
@@ -270,6 +658,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
         <cite>Aina Pacificador</cite>
         <span class="review-source">Google review</span>
       </div>
+
       <div class="review-card reveal">
         <span class="review-badge">Google</span>
         <span class="quote-mark">&ldquo;</span>
@@ -278,6 +667,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
         <cite>Marios Elles</cite>
         <span class="review-source">Google review</span>
       </div>
+
       <div class="review-card reveal">
         <span class="review-badge">Google</span>
         <span class="quote-mark">&ldquo;</span>
@@ -286,20 +676,28 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
         <cite>Julie Bourke</cite>
         <span class="review-source">Google review</span>
       </div>
-      <div class="review-card reveal">
-        <span class="review-badge">Google</span>
-        <span class="quote-mark">&ldquo;</span>
-        <div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-        <blockquote>Handled an interstate piano move, storage and rubbish removal all in one job. No job too big or small.</blockquote>
-        <cite>Claudia Maio</cite>
-        <span class="review-source">Google review</span>
-      </div>
-    </div>
-    <div class="reveal reviews-cta">
-      <a href="https://www.google.com/search?q=Antigravity+Removals+Sydney+reviews" target="_blank" rel="noopener" class="tile-link">Read all our reviews on Google →</a>
+
+      <!-- CTA card — styled like a review card, sits inside the grid -->
+
+      <a href="https://www.google.com/search?q=Antigravity+Removals+Sydney+reviews" target="_blank" rel="noopener" class="review-card review-card--cta reveal">
+        <div>
+          <span class="review-badge">Google</span>
+          <div class="cta-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <h3>Read more reviews</h3>
+          <p>See what other customers are saying about us on Google.</p>
+        </div>
+        <span class="cta-link">Read all reviews</span>
+      </a>
+
     </div>
   </div>
 </section>
+
+<!-- ====== BOTTOM CTA ====== -->
 
 <section class="cta-band">
   <div class="wrap">

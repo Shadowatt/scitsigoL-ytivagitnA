@@ -13,79 +13,76 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
        Contact page — self-contained styles
        ========================================================================== */
 
-    /* ---- Contact cards ---------------------------------------------- */
-
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 28px;
+      gap: 24px;
       margin-top: 40px;
     }
     @media (max-width: 700px) {
-      .contact-grid { grid-template-columns: 1fr; gap: 20px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 18px; }
     }
 
     .contact-card {
       background: var(--white);
       border: 1px solid var(--grey-light);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 32px 28px 28px;
       display: flex;
       flex-direction: column;
       position: relative;
       overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.25s ease;
-      box-shadow: 0 2px 8px rgba(15, 16, 17, 0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      box-shadow: 0 2px 10px rgba(15, 16, 17, 0.04);
     }
 
-    .contact-card::before {
+    /* Top-right icon badge */
+
+    .contact-card::after {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
+      top: -40px;
+      right: -40px;
+      width: 130px;
+      height: 130px;
       background: var(--orange);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
+      opacity: 0.06;
+      border-radius: 50%;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
     }
 
     .contact-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 10px 28px rgba(15, 16, 17, 0.10);
-      border-color: var(--grey-light);
+      box-shadow: 0 14px 36px rgba(15, 16, 17, 0.10);
     }
 
-    .contact-card:hover::before {
-      transform: scaleX(1);
-    }
+    .contact-card:hover::after { opacity: 0.12; }
 
     .contact-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
       background: var(--black);
       color: var(--white);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       flex-shrink: 0;
       transition: background 0.25s ease, transform 0.3s ease;
     }
 
     .contact-card:hover .contact-icon {
       background: var(--orange);
-      transform: scale(1.05);
+      transform: scale(1.06) rotate(-3deg);
     }
 
-    .contact-icon svg {
-      width: 26px;
-      height: 26px;
-    }
+    .contact-icon svg { width: 24px; height: 24px; }
 
     .contact-card h3 {
       font-family: var(--font-head);
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       font-weight: 700;
       margin: 0 0 6px;
       color: var(--black);
@@ -95,7 +92,7 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
     .contact-card p.hint {
       font-size: 0.95rem;
       color: var(--grey);
-      margin: 0 0 16px;
+      margin: 0 0 18px;
       line-height: 1.5;
       max-width: 100%;
     }
@@ -110,34 +107,48 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
       border-bottom: 3px solid var(--orange);
       padding-bottom: 2px;
       align-self: flex-start;
-      transition: color 0.2s ease, border-color 0.2s ease;
+      transition: color 0.2s ease;
       word-break: break-word;
     }
 
-    .contact-card a.big-link:hover {
-      color: var(--orange);
-      border-color: var(--orange-dark);
-    }
+    .contact-card a.big-link:hover { color: var(--orange); }
 
     @media (max-width: 480px) {
       .contact-card { padding: 26px 22px 22px; }
-      .contact-icon { width: 48px; height: 48px; margin-bottom: 14px; }
+      .contact-icon { width: 46px; height: 46px; margin-bottom: 16px; }
       .contact-icon svg { width: 22px; height: 22px; }
       .contact-card h3 { font-size: 1.2rem; }
       .contact-card a.big-link { font-size: 1.05rem; }
     }
 
-    /* ---- "What to include" tip cards -------------------------------- */
+    /* ---- What to include — bento grid ----------------------------- */
 
     .prep-section {
       background: var(--black-deep);
       color: var(--white);
       padding: var(--section-pad) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prep-section::before {
+      content: '';
+      position: absolute;
+      right: -100px;
+      top: -100px;
+      width: 400px;
+      height: 400px;
+      background: var(--orange);
+      opacity: 0.06;
+      transform: rotate(45deg);
+      pointer-events: none;
     }
 
     .prep-header {
       max-width: 640px;
       margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
     }
 
     .prep-header h2 { color: var(--white); margin-bottom: 12px; }
@@ -153,6 +164,8 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
+      position: relative;
+      z-index: 1;
     }
 
     @media (max-width: 700px) {
@@ -162,13 +175,29 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
     .prep-card {
       background: #1a1b1d;
       border: 1px solid #232426;
-      border-radius: 12px;
-      padding: 26px 24px;
+      border-radius: 14px;
+      padding: 28px 26px;
       display: flex;
       align-items: flex-start;
       gap: 18px;
-      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
+
+    /* First card spans 2 columns and gets extra padding */
+
+    .prep-card:first-child {
+      grid-column: span 2;
+      padding: 32px 30px;
+    }
+
+    @media (max-width: 700px) {
+      .prep-card:first-child { grid-column: span 1; padding: 28px 26px; }
+    }
+
+    .prep-card:first-child h3 { font-size: 1.35rem; }
+    .prep-card:first-child p { font-size: 1rem; max-width: 56ch; }
 
     .prep-card:hover {
       transform: translateY(-3px);
@@ -177,44 +206,44 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
     }
 
     .prep-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
       background: var(--orange);
       color: var(--white);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      transition: transform 0.25s ease;
+      transition: transform 0.3s ease;
     }
 
     .prep-card:hover .prep-icon {
-      transform: scale(1.08) rotate(-3deg);
+      transform: scale(1.08) rotate(-4deg);
     }
 
-    .prep-icon svg { width: 22px; height: 22px; }
+    .prep-icon svg { width: 24px; height: 24px; }
 
     .prep-card h3 {
       font-family: var(--font-head);
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: var(--white);
-      margin: 0 0 4px;
+      margin: 0 0 6px;
       letter-spacing: 0.2px;
     }
 
     .prep-card p {
       color: #9a9a9d;
       font-size: 0.95rem;
-      line-height: 1.5;
+      line-height: 1.55;
       margin: 0;
       max-width: 100%;
     }
 
     @media (max-width: 480px) {
       .prep-card { padding: 22px 20px; gap: 14px; }
-      .prep-icon { width: 40px; height: 40px; }
+      .prep-icon { width: 42px; height: 42px; }
       .prep-icon svg { width: 20px; height: 20px; }
       .prep-card h3 { font-size: 1.05rem; }
       .prep-card p { font-size: 0.9rem; }
@@ -224,8 +253,6 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
 <body>
 
 {% include "header.njk" %}
-
-<!-- ====== PAGE HEADER ====== -->
 
 <section class="page-header">
   <div class="wrap">
@@ -237,13 +264,10 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
 
 <div class="bar-divider"></div>
 
-<!-- ====== CONTACT CARDS ====== -->
-
 <section class="section">
   <div class="wrap">
     <div class="contact-grid reveal-group">
 
-      <!-- Email -->
       <div class="contact-card reveal">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -256,7 +280,6 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
         <a href="mailto:antigravitylogistics@gmail.com" class="big-link">antigravitylogistics@gmail.com</a>
       </div>
 
-      <!-- Phone -->
       <div class="contact-card reveal">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -268,7 +291,6 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
         <a href="tel:+61422553675" class="big-link">0422 553 675</a>
       </div>
 
-      <!-- Facebook -->
       <div class="contact-card reveal">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -280,7 +302,6 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
         <a href="https://www.facebook.com/people/Antigravity-removals/100063562569757/" target="_blank" rel="noopener" class="big-link">Antigravity Logistics</a>
       </div>
 
-      <!-- Instagram -->
       <div class="contact-card reveal">
         <div class="contact-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -297,8 +318,6 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
     </div>
   </div>
 </section>
-
-<!-- ====== WHAT TO INCLUDE ====== -->
 
 <section class="prep-section">
   <div class="wrap">
@@ -319,7 +338,7 @@ description: "Get in touch with Antigravity Logistics for transport, heavy handl
         </div>
         <div>
           <h3>What needs moving</h3>
-          <p>Furniture, equipment, boxes, pallets — anything that needs to be transported, handled or removed.</p>
+          <p>Furniture, equipment, boxes, pallets — anything that needs to be transported, handled or removed. The more detail you give us about the items involved, the more accurate we can be with the plan and price.</p>
         </div>
       </div>
 

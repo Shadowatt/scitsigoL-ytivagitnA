@@ -9,22 +9,33 @@ description: "See what's included with every Antigravity Logistics job — profe
   {% include "head.njk" %}
 
   <style>
+    /* ==========================================================================
+       What's Included page — self-contained styles
+       ========================================================================== */
+
+    /* ---- Bento grid for included items ---------------------------- */
+
     .included-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
       margin-top: 40px;
     }
 
+    @media (max-width: 1000px) { .included-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 700px)  { .included-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px)  { .included-grid { grid-template-columns: 1fr; } }
+
     .included-card {
       background: var(--white);
       border: 1px solid var(--grey-light);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 28px 24px;
       display: flex;
+      flex-direction: column;
       align-items: flex-start;
-      gap: 18px;
-      transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.25s ease;
+      gap: 14px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       position: relative;
       overflow: hidden;
     }
@@ -32,49 +43,74 @@ description: "See what's included with every Antigravity Logistics job — profe
     .included-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; bottom: 0;
-      width: 3px;
+      top: 0; left: 0; right: 0;
+      height: 3px;
       background: var(--orange);
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 0.3s ease;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
     }
 
     .included-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 24px rgba(15, 16, 17, 0.08);
-      border-color: var(--grey-light);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px rgba(15, 16, 17, 0.10);
     }
 
-    .included-card:hover::before { transform: scaleY(1); }
+    .included-card:hover::before { transform: scaleX(1); }
+
+    /* First card spans 2 columns + 2 rows */
+
+    .included-card:first-child {
+      grid-column: span 2;
+      grid-row: span 2;
+      padding: 36px 32px;
+    }
+
+    @media (max-width: 1000px) { .included-card:first-child { grid-column: span 2; grid-row: span 2; } }
+    @media (max-width: 700px)  { .included-card:first-child { grid-column: span 2; grid-row: span 1; } }
+    @media (max-width: 480px)  { .included-card:first-child { grid-column: span 1; } }
+
+    .included-card:first-child .included-icon {
+      width: 64px;
+      height: 64px;
+    }
+
+    .included-card:first-child .included-icon svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    .included-card:first-child h3 { font-size: 1.6rem; }
+    .included-card:first-child p { font-size: 1rem; max-width: 48ch; }
 
     .included-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
       background: var(--black);
       color: var(--white);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      transition: background 0.25s ease, transform 0.3s ease;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
 
     .included-card:hover .included-icon {
       background: var(--orange);
-      transform: scale(1.05);
+      transform: scale(1.06) rotate(-4deg);
     }
 
-    .included-icon svg { width: 22px; height: 22px; }
+    .included-icon svg { width: 24px; height: 24px; }
 
     .included-card h3 {
       font-family: var(--font-head);
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      margin: 0 0 4px;
+      margin: 0;
       color: var(--black);
       letter-spacing: 0.2px;
+      line-height: 1.2;
     }
 
     .included-card p {
@@ -86,21 +122,42 @@ description: "See what's included with every Antigravity Logistics job — profe
     }
 
     @media (max-width: 480px) {
-      .included-card { padding: 22px 20px; gap: 14px; }
-      .included-icon { width: 40px; height: 40px; }
-      .included-icon svg { width: 20px; height: 20px; }
+      .included-card { padding: 22px 20px; }
+      .included-icon { width: 42px; height: 42px; }
+      .included-icon svg { width: 22px; height: 22px; }
       .included-card h3 { font-size: 1.05rem; }
       .included-card p { font-size: 0.88rem; }
     }
 
+    /* ---- Pricing section with subtle decorative overlay ----------- */
+
     .pricing-section {
-      background: var(--black);
+      background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
       color: var(--white);
       padding: var(--section-pad) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-section::before {
+      content: '';
+      position: absolute;
+      right: -100px;
+      top: -100px;
+      width: 400px;
+      height: 400px;
+      background: var(--orange);
+      opacity: 0.06;
+      transform: rotate(45deg);
+      pointer-events: none;
     }
 
     .pricing-section h2 { color: var(--white); }
     .pricing-section p { color: #cfcfd1; }
+
+    .pricing-section .wrap { position: relative; z-index: 1; }
+
+    /* ---- Quote band ------------------------------------------------ */
 
     .quote-band {
       background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
@@ -156,11 +213,7 @@ description: "See what's included with every Antigravity Logistics job — profe
       margin-bottom: 14px;
     }
 
-    .quote-band-text h2 {
-      color: var(--white);
-      margin-bottom: 12px;
-      max-width: 22ch;
-    }
+    .quote-band-text h2 { color: var(--white); margin-bottom: 12px; max-width: 22ch; }
 
     .quote-band-text p {
       color: #cfcfd1;
@@ -222,10 +275,8 @@ description: "See what's included with every Antigravity Logistics job — profe
             <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
           </svg>
         </div>
-        <div>
-          <h3>Professional team</h3>
-          <p>Experienced movers who know how to handle your belongings with care.</p>
-        </div>
+        <h3>Professional team</h3>
+        <p>Experienced movers who know how to handle your belongings with care. Every job is done by our own trained team — no subcontractors, no surprises.</p>
       </div>
 
       <div class="included-card reveal">
@@ -235,10 +286,8 @@ description: "See what's included with every Antigravity Logistics job — profe
             <polyline points="17 18 12 13 7 18"/>
           </svg>
         </div>
-        <div>
-          <h3>Loading &amp; unloading</h3>
-          <p>We handle the heavy lifting from start to finish — you don't lift a finger.</p>
-        </div>
+        <h3>Loading &amp; unloading</h3>
+        <p>You don't lift a finger.</p>
       </div>
 
       <div class="included-card reveal">
@@ -250,10 +299,8 @@ description: "See what's included with every Antigravity Logistics job — profe
             <circle cx="18.5" cy="18.5" r="2.5"/>
           </svg>
         </div>
-        <div>
-          <h3>Heavy-duty equipment</h3>
-          <p>Trolleys, straps, dollies and everything needed for a smooth move.</p>
-        </div>
+        <h3>Heavy-duty equipment</h3>
+        <p>Trolleys, straps, dollies.</p>
       </div>
 
       <div class="included-card reveal">
@@ -264,10 +311,8 @@ description: "See what's included with every Antigravity Logistics job — profe
             <path d="M10 10v10"/>
           </svg>
         </div>
-        <div>
-          <h3>Protective materials</h3>
-          <p>Blankets, shrink wrap and padding used whenever needed — no extra charge.</p>
-        </div>
+        <h3>Protective materials</h3>
+        <p>Blankets and wrap, no extra charge.</p>
       </div>
 
       <div class="included-card reveal">
@@ -276,10 +321,8 @@ description: "See what's included with every Antigravity Logistics job — profe
             <path d="M12 2 15 8l6 .9-4.5 4.4 1 6.1L12 16.5 6.5 19.4l1-6.1L3 8.9 9 8z"/>
           </svg>
         </div>
-        <div>
-          <h3>Careful handling</h3>
-          <p>Furniture, equipment and fragile items treated like they're our own.</p>
-        </div>
+        <h3>Careful handling</h3>
+        <p>Fragile items treated like ours.</p>
       </div>
 
       <div class="included-card reveal">
@@ -288,10 +331,8 @@ description: "See what's included with every Antigravity Logistics job — profe
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
         </div>
-        <div>
-          <h3>Safe transport</h3>
-          <p>Fully insured, carefully secured, and tracked from pickup to drop-off.</p>
-        </div>
+        <h3>Safe transport</h3>
+        <p>Fully insured and secured.</p>
       </div>
 
       <div class="included-card reveal">
@@ -300,10 +341,8 @@ description: "See what's included with every Antigravity Logistics job — profe
             <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
           </svg>
         </div>
-        <div>
-          <h3>Assembly &amp; disassembly</h3>
-          <p>Beds, desks, flat-pack furniture — reassembled at the other end on request.</p>
-        </div>
+        <h3>Assembly &amp; disassembly</h3>
+        <p>On request, done properly.</p>
       </div>
 
       <div class="included-card reveal">
@@ -314,17 +353,13 @@ description: "See what's included with every Antigravity Logistics job — profe
             <path d="M8 12h8"/>
           </svg>
         </div>
-        <div>
-          <h3>Flexible solutions</h3>
-          <p>Every job is scoped to your needs — nothing is one-size-fits-all.</p>
-        </div>
+        <h3>Flexible solutions</h3>
+        <p>Scoped to your needs.</p>
       </div>
 
     </div>
   </div>
 </section>
-
-<!-- ====== HOW PRICING WORKS (real photo) ====== -->
 
 <section class="pricing-section">
   <div class="wrap split">
@@ -339,8 +374,6 @@ description: "See what's included with every Antigravity Logistics job — profe
     </div>
   </div>
 </section>
-
-<!-- ====== QUOTE BAND ====== -->
 
 <section class="quote-band">
   <div class="wrap">
