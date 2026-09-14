@@ -13,7 +13,106 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
        Homepage — self-contained styles
        ========================================================================== */
 
-    /* ---- Hero enhancements ------------------------------------------ */
+    /* ---- Hero with photo gallery background --------------------------- */
+
+    .hero {
+      padding: 140px 0 120px;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      background: var(--black); /* fallback if images fail */
+    }
+
+    .hero > .wrap {
+      position: relative;
+      z-index: 3;
+    }
+
+    /* Full-bleed marquee behind the content */
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* Dark overlay so text stays readable */
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg,
+          rgba(15, 16, 17, 0.92) 0%,
+          rgba(15, 16, 17, 0.78) 35%,
+          rgba(15, 16, 17, 0.55) 70%,
+          rgba(15, 16, 17, 0.75) 100%
+        ),
+        linear-gradient(180deg,
+          rgba(15, 16, 17, 0.4) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba(15, 16, 17, 0.6) 100%
+        );
+      z-index: 2;
+    }
+
+    .hero-bg-track {
+      display: flex;
+      width: max-content;
+      height: 100%;
+      animation: hero-scroll 90s linear infinite;
+      will-change: transform;
+      opacity: 0.55;
+      filter: saturate(0.85) contrast(1.05);
+    }
+
+    @keyframes hero-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .hero-bg-item {
+      width: 480px;
+      height: 100%;
+      flex-shrink: 0;
+      margin-right: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-bg-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Pause animation on hover anywhere in the hero */
+
+    .hero:hover .hero-bg-track {
+      animation-play-state: paused;
+    }
+
+    @media (max-width: 640px) {
+      .hero-bg-item { width: 280px; }
+      .hero-bg-track { opacity: 0.4; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-bg-track { animation: none; }
+    }
+
+    /* Bring the existing hero-mark above the background layer */
+
+    .hero-mark {
+      z-index: 2;
+    }
+
+    /* Hero text polish */
 
     .hero .btn-row {
       display: flex;
@@ -22,23 +121,17 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       align-items: center;
     }
 
-    /* Radial glow + subtle diagonal stripes overlay */
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 75% 30%, rgba(255, 80, 51, 0.13) 0%, transparent 55%),
-        radial-gradient(circle at 15% 85%, rgba(255, 80, 51, 0.06) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
     .hero p.lead {
       max-width: 54ch;
+      color: #e0e0e2;
     }
 
-    /* ---- Trust bar — proper padding + no review count --------------- */
+    .hero-eyebrow {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ---- Trust bar ------------------------------------------------- */
 
     .trust-bar .wrap {
       padding: 26px var(--gutter);
@@ -99,50 +192,24 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       margin-top: 12px;
     }
 
-    @media (max-width: 900px) {
-      .service-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    @media (max-width: 900px) { .service-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .service-grid { grid-template-columns: 1fr; } }
 
-    @media (max-width: 560px) {
-      .service-grid { grid-template-columns: 1fr; }
-    }
-
-    /* First card spans 2 columns on desktop */
-
-    .service-grid .service-card:first-child {
-      grid-column: span 2;
-    }
+    .service-grid .service-card:first-child { grid-column: span 2; }
 
     @media (max-width: 900px) {
       .service-grid .service-card:first-child { grid-column: span 2; }
     }
-
     @media (max-width: 560px) {
       .service-grid .service-card:first-child { grid-column: span 1; }
     }
 
-    /* Feature styling for the big card */
+    .service-grid .service-card:first-child h3 { font-size: 1.7rem; }
+    .service-grid .service-card:first-child p { font-size: 1.02rem; max-width: 60ch; }
+    .service-grid .service-card:first-child .service-icon { width: 88px; height: 88px; }
+    .service-grid .service-card:first-child .service-icon img { width: 42px; height: 42px; }
 
-    .service-grid .service-card:first-child h3 {
-      font-size: 1.7rem;
-    }
-
-    .service-grid .service-card:first-child p {
-      font-size: 1.02rem;
-      max-width: 60ch;
-    }
-
-    .service-grid .service-card:first-child .service-icon {
-      width: 88px;
-      height: 88px;
-    }
-
-    .service-grid .service-card:first-child .service-icon img {
-      width: 42px;
-      height: 42px;
-    }
-
-    /* ---- How It Works — horizontal timeline ------------------------- */
+    /* ---- How It Works — timeline ----------------------------------- */
 
     .steps {
       display: grid;
@@ -152,8 +219,6 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       position: relative;
       background: transparent;
     }
-
-    /* Dotted connecting line behind the numbers (desktop only) */
 
     .steps::before {
       content: '';
@@ -182,9 +247,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       transition: transform 0.25s ease;
     }
 
-    .step:hover {
-      transform: translateY(-4px);
-    }
+    .step:hover { transform: translateY(-4px); }
 
     .step-num {
       width: 88px;
@@ -212,10 +275,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       transform: scale(1.05);
     }
 
-    .step h3 {
-      font-size: 1.25rem;
-      margin: 0 0 8px;
-    }
+    .step h3 { font-size: 1.25rem; margin: 0 0 8px; }
 
     .step p {
       font-size: 0.95rem;
@@ -256,16 +316,12 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
         padding: 0;
       }
 
-      .step-num {
-        margin: 0;
-        flex-shrink: 0;
-      }
-
+      .step-num { margin: 0; flex-shrink: 0; }
       .step p { margin: 0; max-width: 100%; }
       .step h3 { margin-bottom: 6px; }
     }
 
-    /* ---- Quote band ------------------------------------------------- */
+    /* ---- Quote band ------------------------------------------------ */
 
     .quote-band {
       background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
@@ -321,11 +377,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       margin-bottom: 14px;
     }
 
-    .quote-band-text h2 {
-      color: var(--white);
-      margin-bottom: 12px;
-      max-width: 22ch;
-    }
+    .quote-band-text h2 { color: var(--white); margin-bottom: 12px; max-width: 22ch; }
 
     .quote-band-text p {
       color: #cfcfd1;
@@ -355,7 +407,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       .quote-band-text h2 { font-size: 1.8rem; }
     }
 
-    /* ---- Reviews section ------------------------------------------- */
+    /* ---- Reviews --------------------------------------------------- */
 
     .reviews-sub {
       color: #cfcfd1;
@@ -375,8 +427,6 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
     }
 
-    /* Make the reviews grid 3 cols on desktop, but allow a CTA card at the end */
-
     .reviews-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -384,15 +434,8 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       margin-top: 40px;
     }
 
-    @media (max-width: 900px) {
-      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 560px) {
-      .reviews-grid { grid-template-columns: 1fr; }
-    }
-
-    /* "Read all reviews" CTA card — styled like a review card */
+    @media (max-width: 900px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .reviews-grid { grid-template-columns: 1fr; } }
 
     .review-card--cta {
       display: flex;
@@ -441,10 +484,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       transform: scale(1.08) rotate(-4deg);
     }
 
-    .review-card--cta .cta-icon svg {
-      width: 24px;
-      height: 24px;
-    }
+    .review-card--cta .cta-icon svg { width: 24px; height: 24px; }
 
     .review-card--cta h3 {
       font-family: var(--font-head);
@@ -490,10 +530,43 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
 
 {% include "header.njk" %}
 
-<!-- ====== HERO ====== -->
+<!-- ====== HERO with gallery background ====== -->
 
 <section class="hero">
+
+  <!-- Background gallery marquee -->
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-bg-track">
+
+      <!-- Set A -->
+      <div class="hero-bg-item"><img src="{{ '/images/photos/truck-front.jpeg' | url }}" alt="" loading="eager" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/2-men-with-long-yellow-item.jpeg' | url }}" alt="" loading="eager" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/heavy-medical-bed-carefully-moved-upstairs-without-effort.jpeg' | url }}" alt="" loading="eager" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/wrapped-couch.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/full-truck-resident-move.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/truck-back-ready-to-load-with-ramp.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/assembling-table-bottom.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/stuff-in-the-truck-wrapped-by-blankets.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/full-truck-of-medical-creates.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/wrapping-with-see-though-wrap.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+
+      <!-- Set B (duplicate for seamless loop) -->
+      <div class="hero-bg-item"><img src="{{ '/images/photos/truck-front.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/2-men-with-long-yellow-item.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/heavy-medical-bed-carefully-moved-upstairs-without-effort.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/wrapped-couch.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/full-truck-resident-move.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/truck-back-ready-to-load-with-ramp.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/assembling-table-bottom.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/stuff-in-the-truck-wrapped-by-blankets.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/full-truck-of-medical-creates.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+      <div class="hero-bg-item"><img src="{{ '/images/photos/wrapping-with-see-though-wrap.jpeg' | url }}" alt="" loading="lazy" decoding="async"></div>
+
+    </div>
+  </div>
+
   <div class="hero-mark"></div>
+
   <div class="wrap">
     <div class="hero-eyebrow">Sydney &amp; NSW</div>
     <h1>Move it. Handle it. Get it done.</h1>
@@ -527,7 +600,6 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       <p>Antigravity Logistics has grown from a residential moving business into a broader transport, logistics and heavy-handling company.</p>
       <p>We provide reliable transport and handling solutions for businesses, organisations, contractors and private customers across Sydney and NSW.</p>
 
-      
       <a href="{{ '/whats-included/' | url }}" class="tile-link">See what's included →</a>
     </div>
     <div class="media reveal">
@@ -676,8 +748,6 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
         <cite>Julie Bourke</cite>
         <span class="review-source">Google review</span>
       </div>
-
-      <!-- CTA card — styled like a review card, sits inside the grid -->
 
       <a href="https://www.google.com/search?q=Antigravity+Removals+Sydney+reviews" target="_blank" rel="noopener" class="review-card review-card--cta reveal">
         <div>
