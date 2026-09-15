@@ -38,7 +38,10 @@ description: "See what's included with every Antigravity Logistics job — profe
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       position: relative;
       overflow: hidden;
+      isolation: isolate;
     }
+
+    /* Top accent bar */
 
     .included-card::before {
       content: '';
@@ -49,6 +52,7 @@ description: "See what's included with every Antigravity Logistics job — profe
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.35s ease;
+      z-index: 2;
     }
 
     .included-card:hover {
@@ -58,12 +62,56 @@ description: "See what's included with every Antigravity Logistics job — profe
 
     .included-card:hover::before { transform: scaleX(1); }
 
-    /* First card spans 2 columns + 2 rows */
+    /* ---- Hover photo layer ----------------------------------------- */
+
+    .card-photo {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transform: scale(1.06);
+      transition: opacity 0.6s ease, transform 0.9s ease;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* White gradient mask — image is fully visible on the right,
+       fades to pure white on the left where the text sits */
+
+    .card-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        100deg,
+        var(--white) 0%,
+        rgba(255, 255, 255, 0.96) 35%,
+        rgba(255, 255, 255, 0.75) 60%,
+        rgba(255, 255, 255, 0.35) 100%
+      );
+    }
+
+    .included-card:hover .card-photo {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Everything else stays above the photo */
+
+    .included-card > *:not(.card-photo) {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ---- First card (spans 2x2) ------------------------------------ */
 
     .included-card:first-child {
       grid-column: span 2;
       grid-row: span 2;
       padding: 36px 32px;
+      min-height: 300px;
     }
 
     @media (max-width: 1000px) { .included-card:first-child { grid-column: span 2; grid-row: span 2; } }
@@ -82,6 +130,21 @@ description: "See what's included with every Antigravity Logistics job — profe
 
     .included-card:first-child h3 { font-size: 1.6rem; }
     .included-card:first-child p { font-size: 1rem; max-width: 48ch; }
+
+    /* Bigger card gets a softer, more even gradient so more of the
+       photo shows through on hover */
+
+    .included-card:first-child .card-photo::after {
+      background: linear-gradient(
+        105deg,
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(255, 255, 255, 0.88) 30%,
+        rgba(255, 255, 255, 0.55) 65%,
+        rgba(255, 255, 255, 0.2) 100%
+      );
+    }
+
+    /* ---- Icon tile ------------------------------------------------ */
 
     .included-icon {
       width: 48px;
@@ -102,6 +165,8 @@ description: "See what's included with every Antigravity Logistics job — profe
     }
 
     .included-icon svg { width: 24px; height: 24px; }
+
+    /* ---- Copy ----------------------------------------------------- */
 
     .included-card h3 {
       font-family: var(--font-head);
@@ -129,7 +194,7 @@ description: "See what's included with every Antigravity Logistics job — profe
       .included-card p { font-size: 0.88rem; }
     }
 
-    /* ---- Pricing section with subtle decorative overlay ----------- */
+    /* ---- Pricing section ------------------------------------------ */
 
     .pricing-section {
       background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
@@ -266,7 +331,9 @@ description: "See what's included with every Antigravity Logistics job — profe
   <div class="wrap">
     <div class="included-grid reveal-group">
 
+      <!-- Professional team -->
       <div class="included-card reveal">
+        <div class="card-photo" style="background-image: url('{{ '/images/photos/2-men-with-long-yellow-item.jpeg' | url }}');"></div>
         <div class="included-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -279,7 +346,9 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>Experienced movers who know how to handle your belongings with care. Every job is done by our own trained team — no subcontractors, no surprises.</p>
       </div>
 
+      <!-- Loading & unloading -->
       <div class="included-card reveal">
+        <div class="card-photo" style="background-image: url('{{ '/images/photos/truck-back-ready-to-load-with-ramp.jpeg' | url }}');"></div>
         <div class="included-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="17 11 12 6 7 11"/>
@@ -290,7 +359,9 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>You don't lift a finger.</p>
       </div>
 
+      <!-- Heavy-duty equipment -->
       <div class="included-card reveal">
+        <div class="card-photo" style="background-image: url('{{ '/images/photos/carefull-bedframe-removal-to-upstairs.jpeg' | url }}');"></div>
         <div class="included-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="1" y="3" width="15" height="13"/>
@@ -303,7 +374,9 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>Trolleys, straps, dollies.</p>
       </div>
 
+      <!-- Protective materials -->
       <div class="included-card reveal">
+        <div class="card-photo" style="background-image: url('{{ '/images/photos/wrapping-with-see-though-wrap.jpeg' | url }}');"></div>
         <div class="included-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M4 4h16v16H4z"/>
@@ -315,7 +388,9 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>Blankets and wrap, no extra charge.</p>
       </div>
 
+      <!-- Careful handling -->
       <div class="included-card reveal">
+        <div class="card-photo" style="background-image: url('{{ '/images/photos/wrapped-couch.jpeg' | url }}');"></div>
         <div class="included-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M12 2 15 8l6 .9-4.5 4.4 1 6.1L12 16.5 6.5 19.4l1-6.1L3 8.9 9 8z"/>
@@ -325,7 +400,9 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>Fragile items treated like ours.</p>
       </div>
 
+      <!-- Safe transport -->
       <div class="included-card reveal">
+        <div class="card-photo" style="background-image: url('{{ '/images/photos/stuff-in-the-truck-wrapped-by-blankets.jpeg' | url }}');"></div>
         <div class="included-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -335,7 +412,9 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>Fully insured and secured.</p>
       </div>
 
+      <!-- Assembly & disassembly -->
       <div class="included-card reveal">
+        <div class="card-photo" style="background-image: url('{{ '/images/photos/assembling-table-bottom.jpeg' | url }}');"></div>
         <div class="included-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
@@ -345,7 +424,9 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>On request, done properly.</p>
       </div>
 
+      <!-- Flexible solutions -->
       <div class="included-card reveal">
+        <div class="card-photo" style="background-image: url('{{ '/images/photos/full-truck-resident-move.jpeg' | url }}');"></div>
         <div class="included-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10"/>
