@@ -13,8 +13,6 @@ description: "See what's included with every Antigravity Logistics job — profe
        What's Included page — self-contained styles
        ========================================================================== */
 
-    /* ---- Bento grid for included items ---------------------------- */
-
     .included-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -41,8 +39,6 @@ description: "See what's included with every Antigravity Logistics job — profe
       isolation: isolate;
     }
 
-    /* Top accent bar */
-
     .included-card::before {
       content: '';
       position: absolute;
@@ -62,8 +58,6 @@ description: "See what's included with every Antigravity Logistics job — profe
 
     .included-card:hover::before { transform: scaleX(1); }
 
-    /* ---- Hover photo layer ----------------------------------------- */
-
     .card-photo {
       position: absolute;
       inset: 0;
@@ -76,9 +70,6 @@ description: "See what's included with every Antigravity Logistics job — profe
       z-index: 0;
       pointer-events: none;
     }
-
-    /* White gradient mask — image is fully visible on the right,
-       fades to pure white on the left where the text sits */
 
     .card-photo::after {
       content: '';
@@ -98,14 +89,10 @@ description: "See what's included with every Antigravity Logistics job — profe
       transform: scale(1);
     }
 
-    /* Everything else stays above the photo */
-
     .included-card > *:not(.card-photo) {
       position: relative;
       z-index: 1;
     }
-
-    /* ---- First card (spans 2x2) ------------------------------------ */
 
     .included-card:first-child {
       grid-column: span 2;
@@ -118,21 +105,10 @@ description: "See what's included with every Antigravity Logistics job — profe
     @media (max-width: 700px)  { .included-card:first-child { grid-column: span 2; grid-row: span 1; } }
     @media (max-width: 480px)  { .included-card:first-child { grid-column: span 1; } }
 
-    .included-card:first-child .included-icon {
-      width: 64px;
-      height: 64px;
-    }
-
-    .included-card:first-child .included-icon svg {
-      width: 30px;
-      height: 30px;
-    }
-
+    .included-card:first-child .included-icon { width: 64px; height: 64px; }
+    .included-card:first-child .included-icon svg { width: 30px; height: 30px; }
     .included-card:first-child h3 { font-size: 1.6rem; }
     .included-card:first-child p { font-size: 1rem; max-width: 48ch; }
-
-    /* Bigger card gets a softer, more even gradient so more of the
-       photo shows through on hover */
 
     .included-card:first-child .card-photo::after {
       background: linear-gradient(
@@ -143,8 +119,6 @@ description: "See what's included with every Antigravity Logistics job — profe
         rgba(255, 255, 255, 0.2) 100%
       );
     }
-
-    /* ---- Icon tile ------------------------------------------------ */
 
     .included-icon {
       width: 48px;
@@ -165,8 +139,6 @@ description: "See what's included with every Antigravity Logistics job — profe
     }
 
     .included-icon svg { width: 24px; height: 24px; }
-
-    /* ---- Copy ----------------------------------------------------- */
 
     .included-card h3 {
       font-family: var(--font-head);
@@ -194,8 +166,6 @@ description: "See what's included with every Antigravity Logistics job — profe
       .included-card p { font-size: 0.88rem; }
     }
 
-    /* ---- Pricing section ------------------------------------------ */
-
     .pricing-section {
       background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
       color: var(--white);
@@ -221,8 +191,6 @@ description: "See what's included with every Antigravity Logistics job — profe
     .pricing-section p { color: #cfcfd1; }
 
     .pricing-section .wrap { position: relative; z-index: 1; }
-
-    /* ---- Quote band ------------------------------------------------ */
 
     .quote-band {
       background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
@@ -331,7 +299,6 @@ description: "See what's included with every Antigravity Logistics job — profe
   <div class="wrap">
     <div class="included-grid reveal-group">
 
-      <!-- Professional team -->
       <div class="included-card reveal">
         <div class="card-photo" style="background-image: url('{{ '/images/photos/2-men-with-long-yellow-item.jpeg' | url }}');"></div>
         <div class="included-icon">
@@ -346,7 +313,6 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>Experienced movers who know how to handle your belongings with care. Every job is done by our own trained team — no subcontractors, no surprises.</p>
       </div>
 
-      <!-- Loading & unloading -->
       <div class="included-card reveal">
         <div class="card-photo" style="background-image: url('{{ '/images/photos/truck-back-ready-to-load-with-ramp.jpeg' | url }}');"></div>
         <div class="included-icon">
@@ -359,7 +325,6 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>You don't lift a finger.</p>
       </div>
 
-      <!-- Heavy-duty equipment -->
       <div class="included-card reveal">
         <div class="card-photo" style="background-image: url('{{ '/images/photos/carefull-bedframe-removal-to-upstairs.jpeg' | url }}');"></div>
         <div class="included-icon">
@@ -374,7 +339,6 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>Trolleys, straps, dollies.</p>
       </div>
 
-      <!-- Protective materials -->
       <div class="included-card reveal">
         <div class="card-photo" style="background-image: url('{{ '/images/photos/wrapping-with-see-though-wrap.jpeg' | url }}');"></div>
         <div class="included-icon">
@@ -384,11 +348,10 @@ description: "See what's included with every Antigravity Logistics job — profe
             <path d="M10 10v10"/>
           </svg>
         </div>
-        <h3>Protective materials</h3>
-        <p>Blankets and wrap, no extra charge.</p>
+        <h3>Protective blankets &amp; straps</h3>
+        <p>Included on every job — no extra charge.</p>
       </div>
 
-      <!-- Careful handling -->
       <div class="included-card reveal">
         <div class="card-photo" style="background-image: url('{{ '/images/photos/wrapped-couch.jpeg' | url }}');"></div>
         <div class="included-icon">
@@ -400,7 +363,6 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>Fragile items treated like ours.</p>
       </div>
 
-      <!-- Safe transport -->
       <div class="included-card reveal">
         <div class="card-photo" style="background-image: url('{{ '/images/photos/stuff-in-the-truck-wrapped-by-blankets.jpeg' | url }}');"></div>
         <div class="included-icon">
@@ -412,7 +374,6 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>Fully insured and secured.</p>
       </div>
 
-      <!-- Assembly & disassembly -->
       <div class="included-card reveal">
         <div class="card-photo" style="background-image: url('{{ '/images/photos/assembling-table-bottom.jpeg' | url }}');"></div>
         <div class="included-icon">
@@ -424,7 +385,6 @@ description: "See what's included with every Antigravity Logistics job — profe
         <p>On request, done properly.</p>
       </div>
 
-      <!-- Flexible solutions -->
       <div class="included-card reveal">
         <div class="card-photo" style="background-image: url('{{ '/images/photos/full-truck-resident-move.jpeg' | url }}');"></div>
         <div class="included-icon">

@@ -1,7 +1,7 @@
 ---
 permalink: /services/index.html
 title: "Services | Antigravity Logistics"
-description: "Transport &amp; logistics, heavy handling, hospital &amp; medical equipment, residential moves, and disposal &amp; removal — across Sydney and NSW."
+description: "Residential removals, commercial relocations, transport &amp; logistics, heavy &amp; specialised handling, and removal &amp; disposal — across Sydney and NSW."
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -20,8 +20,6 @@ description: "Transport &amp; logistics, heavy handling, hospital &amp; medical 
       margin: 0 0 8px;
     }
 
-    /* ---- Service bento grid ---------------------------------------- */
-
     .service-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -32,9 +30,7 @@ description: "Transport &amp; logistics, heavy handling, hospital &amp; medical 
     @media (max-width: 900px) { .service-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .service-grid { grid-template-columns: 1fr; } }
 
-    .service-grid .service-card:first-child {
-      grid-column: span 2;
-    }
+    .service-grid .service-card:first-child { grid-column: span 2; }
 
     @media (max-width: 900px) {
       .service-grid .service-card:first-child { grid-column: span 2; }
@@ -145,8 +141,6 @@ description: "Transport &amp; logistics, heavy handling, hospital &amp; medical 
       background: var(--grey-light);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
-    /* First photo spans 2 cols and 2 rows */
 
     .photo-strip-item:first-child {
       grid-column: span 2;
@@ -323,37 +317,37 @@ description: "Transport &amp; logistics, heavy handling, hospital &amp; medical 
     <div class="service-grid reveal-group">
 
       <div class="service-card reveal">
+        <div class="service-icon"><img src="{{ '/images/icon-residential.svg' | url }}" alt="" loading="lazy"></div>
+        <h3>Residential Removals</h3>
+        <p>Professional house and apartment removals, from single items to complete relocations. We handle your belongings with care from pickup to placement, including furniture disassembly and reassembly where needed. Protective blankets and wrapping are included with every move at no extra charge.</p>
+        <a href="{{ '/quote/' | url }}?service=residential" class="tile-link">Get a quote →</a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><img src="{{ '/images/icon-medical.svg' | url }}" alt="" loading="lazy"></div>
+        <h3>Commercial Removals</h3>
+        <p>Office, business and commercial relocations with flexible solutions to keep your move organised and disruption to a minimum.</p>
+        <a href="{{ '/quote/' | url }}?service=commercial" class="tile-link">Get a quote →</a>
+      </div>
+
+      <div class="service-card reveal">
         <div class="service-icon"><img src="{{ '/images/icon-transport.svg' | url }}" alt="" loading="lazy"></div>
         <h3>Transport &amp; Logistics</h3>
-        <p>Reliable transport for furniture, boxes, crates, pallets, commercial goods, equipment and bulky items across Sydney and NSW — one item or a full load.</p>
+        <p>Reliable one-off and ongoing transport and delivery solutions for businesses, organisations and contractors across Sydney and NSW. Every load is secured with protective blankets and straps to ensure safe travel.</p>
         <a href="{{ '/quote/' | url }}?service=transport" class="tile-link">Get a quote →</a>
       </div>
 
       <div class="service-card reveal">
         <div class="service-icon"><img src="{{ '/images/icon-heavy-handling.svg' | url }}" alt="" loading="lazy"></div>
-        <h3>Heavy Handling</h3>
-        <p>Safe and efficient handling of heavy, oversized and difficult-to-move items, including loading, unloading and positioning.</p>
+        <h3>Heavy &amp; Specialised Handling</h3>
+        <p>Safe handling and transport of heavy, oversized, delicate and difficult-to-move items, including jobs with challenging access.</p>
         <a href="{{ '/quote/' | url }}?service=heavy-handling" class="tile-link">Get a quote →</a>
       </div>
 
       <div class="service-card reveal">
-        <div class="service-icon"><img src="{{ '/images/icon-medical.svg' | url }}" alt="" loading="lazy"></div>
-        <h3>Hospital &amp; Medical Equipment</h3>
-        <p>Careful transport, relocation, positioning and removal of hospital and medical equipment for facilities and organisations.</p>
-        <a href="{{ '/quote/' | url }}?service=medical" class="tile-link">Get a quote →</a>
-      </div>
-
-      <div class="service-card reveal">
-        <div class="service-icon"><img src="{{ '/images/icon-residential.svg' | url }}" alt="" loading="lazy"></div>
-        <h3>Residential Moves</h3>
-        <p>Professional house and apartment moving services, including furniture transport, loading, unloading, packing and heavy-item moving.</p>
-        <a href="{{ '/quote/' | url }}?service=residential" class="tile-link">Get a quote →</a>
-      </div>
-
-      <div class="service-card reveal">
         <div class="service-icon"><img src="{{ '/images/icon-disposal.svg' | url }}" alt="" loading="lazy"></div>
-        <h3>Disposal &amp; Removal</h3>
-        <p>Removal and disposal of unwanted furniture, equipment, household items, office contents and general rubbish.</p>
+        <h3>Removal &amp; Disposal</h3>
+        <p>Removal and responsible disposal of unwanted furniture, equipment, office contents and household items.</p>
         <a href="{{ '/quote/' | url }}?service=disposal" class="tile-link">Get a quote →</a>
       </div>
 
@@ -401,8 +395,8 @@ description: "Transport &amp; logistics, heavy handling, hospital &amp; medical 
             <circle cx="18.5" cy="18.5" r="2.5"/>
           </svg>
         </div>
-        <h3>Proper equipment</h3>
-        <p>Heavy-duty trolleys, straps and protective blankets.</p>
+        <h3>Protective blankets &amp; straps</h3>
+        <p>Included on every move and transport — no extra charge.</p>
       </div>
 
       <div class="perk reveal">

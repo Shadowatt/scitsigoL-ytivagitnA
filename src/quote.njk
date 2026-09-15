@@ -1,7 +1,7 @@
 ---
 permalink: /quote/index.html
 title: "Get a Quote | Antigravity Logistics"
-description: "Request a free quote for transport, heavy handling, residential moves, medical equipment relocation, and disposal services across Sydney and NSW."
+description: "Request a free quote for residential removals, commercial relocations, transport, heavy handling and disposal across Sydney and NSW."
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -48,16 +48,12 @@ description: "Request a free quote for transport, heavy handling, residential mo
       margin-bottom: 28px;
     }
 
-    /* ---- Vertical timeline for "What happens next" -------------- */
-
     .next-steps {
       list-style: none;
       padding: 0;
       margin: 0;
       position: relative;
     }
-
-    /* Dashed connecting line */
 
     .next-steps::before {
       content: '';
@@ -119,8 +115,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
       max-width: 100%;
     }
 
-    /* ---- Call card ------------------------------------------------ */
-
     .call-card {
       padding: 26px 28px;
       background: linear-gradient(135deg, var(--off-white) 0%, #f0efec 100%);
@@ -170,8 +164,6 @@ description: "Request a free quote for transport, heavy handling, residential mo
       position: relative;
       z-index: 1;
     }
-
-    /* ---- Reviews summary — now a card ----------------------------- */
 
     .reviews-summary {
       padding: 28px 26px;
@@ -315,11 +307,11 @@ description: "Request a free quote for transport, heavy handling, residential mo
             <label for="service">What service do you need? *</label>
             <select id="service" name="service" required>
               <option value="">— Please select —</option>
+              <option value="residential">Residential Removals</option>
+              <option value="commercial">Commercial Removals</option>
               <option value="transport">Transport &amp; Logistics</option>
-              <option value="heavy-handling">Heavy Handling</option>
-              <option value="medical">Hospital &amp; Medical Equipment</option>
-              <option value="residential">Residential Move</option>
-              <option value="disposal">Disposal &amp; Removal</option>
+              <option value="heavy-handling">Heavy &amp; Specialised Handling</option>
+              <option value="disposal">Removal &amp; Disposal</option>
               <option value="other">Other / Not sure</option>
             </select>
           </div>

@@ -1,7 +1,7 @@
 ---
 permalink: /index.html
 title: "Antigravity Logistics | Sydney Transport, Heavy Handling &amp; Logistics"
-description: "Antigravity Logistics provides reliable transport, heavy handling and logistics solutions for businesses, organisations and private clients across Sydney and NSW."
+description: "Removals, transport, heavy handling and logistics for businesses, organisations and households across Sydney and NSW."
 ---
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -36,8 +36,6 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       pointer-events: none;
     }
 
-    /* Dark overlay for readability */
-
     .hero-bg::after {
       content: '';
       position: absolute;
@@ -57,8 +55,6 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
         );
       z-index: 2;
     }
-
-    /* Each image: absolutely stacked, crossfades + slow zoom */
 
     .hero-bg-item {
       position: absolute;
@@ -81,11 +77,6 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       opacity: 0.6;
     }
 
-    /* Timeline (36s / 6 images = 6s per image):
-       0–1s   fade in, gentle zoom start
-       1–5s   hold at full opacity, slow zoom
-       5–6s   fade out to next image */
-
     @keyframes heroKenBurns {
       0%   { opacity: 0; transform: scale(1); }
       3%   { opacity: 1; transform: scale(1.005); }
@@ -99,21 +90,12 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       .hero-bg-item img { opacity: 0.5; }
     }
 
-    /* Reduced motion — show only the first image, static */
-
     @media (prefers-reduced-motion: reduce) {
-      .hero-bg-item {
-        animation: none;
-        opacity: 0;
-      }
-      .hero-bg-item:first-child {
-        opacity: 1;
-      }
+      .hero-bg-item { animation: none; opacity: 0; }
+      .hero-bg-item:first-child { opacity: 1; }
     }
 
-    .hero-mark {
-      z-index: 2;
-    }
+    .hero-mark { z-index: 2; }
 
     .hero .btn-row {
       display: flex;
@@ -127,61 +109,14 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
       color: #e0e0e2;
     }
 
-    .hero-eyebrow {
-      position: relative;
-      z-index: 1;
-    }
+    .hero-eyebrow { position: relative; z-index: 1; }
 
     /* ---- Trust bar ------------------------------------------------- */
 
-    .trust-bar .wrap {
-      padding: 26px var(--gutter);
-    }
+    .trust-bar .wrap { padding: 26px var(--gutter); }
 
     @media (max-width: 640px) {
-      .trust-bar .wrap {
-        padding: 22px var(--gutter);
-        gap: 14px 24px;
-      }
-    }
-
-    /* ---- "More than removals" — pill list --------------------------- */
-
-    .about-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-      margin-bottom: 24px;
-    }
-
-    .about-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      background: var(--off-white);
-      border: 1px solid var(--grey-light);
-      border-radius: 999px;
-      font-family: var(--font-head);
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--black);
-      transition: border-color 0.2s ease, background 0.2s ease;
-    }
-
-    .about-pill::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--orange);
-      flex-shrink: 0;
-    }
-
-    .about-pill:hover {
-      border-color: var(--orange);
-      background: var(--white);
+      .trust-bar .wrap { padding: 22px var(--gutter); gap: 14px 24px; }
     }
 
     /* ---- What We Do — bento grid ------------------------------------ */
@@ -531,7 +466,7 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
 
 {% include "header.njk" %}
 
-<!-- ====== HERO with Ken Burns background ====== -->
+<!-- ====== HERO ====== -->
 
 <section class="hero">
 
@@ -567,8 +502,8 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
 
   <div class="wrap">
     <div class="hero-eyebrow">Sydney &amp; NSW</div>
-    <h1>Move it. Handle it. Get it done.</h1>
-    <p class="lead">Transport, heavy handling and logistics solutions for businesses, organisations and private clients across Sydney and NSW.</p>
+    <h1>We move it. We handle it. We get it done.</h1>
+    <p class="lead">Removals, transport, heavy handling and logistics for businesses, organisations and households across Sydney and NSW.</p>
     <div class="btn-row">
       <a href="{{ '/quote/' | url }}" class="btn">Get a Quote</a>
       <a href="{{ '/services/' | url }}" class="btn btn--ghost">Our Services</a>
@@ -594,9 +529,9 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
 <section class="section">
   <div class="wrap split">
     <div class="reveal">
-      <h2>More than removals. More ways to move.</h2>
-      <p>Antigravity Logistics has grown from a residential moving business into a broader transport, logistics and heavy-handling company.</p>
-      <p>We provide reliable transport and handling solutions for businesses, organisations, contractors and private customers across Sydney and NSW.</p>
+      <h2>More than removals. Built to handle more.</h2>
+      <p>Antigravity Logistics combines professional removalist services with transport, logistics and heavy-handling solutions.</p>
+      <p>We work with businesses, organisations, contractors and individuals across Sydney and NSW — from everyday moves and deliveries to complex, difficult-access jobs.</p>
 
       <a href="{{ '/whats-included/' | url }}" class="tile-link">See what's included →</a>
     </div>
@@ -611,51 +546,51 @@ description: "Antigravity Logistics provides reliable transport, heavy handling 
 <section class="section section--dark">
   <div class="wrap reveal">
     <h2>What We Do</h2>
-    <p class="section-intro" style="max-width:56ch;">Five ways we help Sydney and NSW businesses and households keep moving.</p>
+    <p class="section-intro" style="max-width:56ch;">Five ways we help Sydney and NSW households, businesses and organisations keep moving.</p>
   </div>
   <div class="wrap">
     <div class="service-grid reveal-group">
 
       <div class="service-card reveal">
-        <div class="service-icon"><img src="{{ '/images/icon-transport.svg' | url }}" alt="" loading="lazy"></div>
-        <h3>Transport &amp; Logistics</h3>
-        <p>Reliable transport for furniture, boxes, crates, pallets, commercial goods, equipment and bulky items — across Sydney and NSW, one item or a full load.</p>
-        <a href="{{ '/services/' | url }}" class="tile-link">Learn more →</a>
-      </div>
-
-      <div class="service-card reveal">
-        <div class="service-icon"><img src="{{ '/images/icon-heavy-handling.svg' | url }}" alt="" loading="lazy"></div>
-        <h3>Heavy Handling</h3>
-        <p>Safe, efficient handling of heavy and oversized items — loading, unloading and positioning.</p>
-        <a href="{{ '/services/' | url }}" class="tile-link">Learn more →</a>
+        <div class="service-icon"><img src="{{ '/images/icon-residential.svg' | url }}" alt="" loading="lazy"></div>
+        <h3>Residential Removals</h3>
+        <p>Professional house and apartment removals, from single items to complete relocations. We handle your belongings with care from pickup to placement, including furniture disassembly and reassembly where needed. Protective blankets and wrapping included at no extra charge.</p>
+        <a href="{{ '/services/' | url }}?service=residential" class="tile-link">Learn more →</a>
       </div>
 
       <div class="service-card reveal">
         <div class="service-icon"><img src="{{ '/images/icon-medical.svg' | url }}" alt="" loading="lazy"></div>
-        <h3>Hospital &amp; Medical</h3>
-        <p>Careful transport, relocation and positioning of hospital and medical equipment for facilities.</p>
-        <a href="{{ '/services/' | url }}" class="tile-link">Learn more →</a>
+        <h3>Commercial Removals</h3>
+        <p>Office, business and commercial relocations with flexible solutions to keep your move organised and disruption to a minimum.</p>
+        <a href="{{ '/services/' | url }}?service=commercial" class="tile-link">Learn more →</a>
       </div>
 
       <div class="service-card reveal">
-        <div class="service-icon"><img src="{{ '/images/icon-residential.svg' | url }}" alt="" loading="lazy"></div>
-        <h3>Residential Moves</h3>
-        <p>Professional house and apartment moves, including packing and heavy-item handling.</p>
-        <a href="{{ '/services/' | url }}" class="tile-link">Learn more →</a>
+        <div class="service-icon"><img src="{{ '/images/icon-transport.svg' | url }}" alt="" loading="lazy"></div>
+        <h3>Transport &amp; Logistics</h3>
+        <p>Reliable one-off and ongoing transport and delivery solutions for businesses, organisations and contractors across Sydney and NSW.</p>
+        <a href="{{ '/services/' | url }}?service=transport" class="tile-link">Learn more →</a>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon"><img src="{{ '/images/icon-heavy-handling.svg' | url }}" alt="" loading="lazy"></div>
+        <h3>Heavy &amp; Specialised Handling</h3>
+        <p>Safe handling and transport of heavy, oversized, delicate and difficult-to-move items, including jobs with challenging access.</p>
+        <a href="{{ '/services/' | url }}?service=heavy-handling" class="tile-link">Learn more →</a>
       </div>
 
       <div class="service-card reveal">
         <div class="service-icon"><img src="{{ '/images/icon-disposal.svg' | url }}" alt="" loading="lazy"></div>
-        <h3>Disposal &amp; Removal</h3>
-        <p>Removal and disposal of unwanted furniture, equipment and general rubbish.</p>
-        <a href="{{ '/services/' | url }}" class="tile-link">Learn more →</a>
+        <h3>Removal &amp; Disposal</h3>
+        <p>Removal and responsible disposal of unwanted furniture, equipment, office contents and household items.</p>
+        <a href="{{ '/services/' | url }}?service=disposal" class="tile-link">Learn more →</a>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ====== HOW IT WORKS — timeline ====== -->
+<!-- ====== HOW IT WORKS ====== -->
 
 <section class="section">
   <div class="wrap">
