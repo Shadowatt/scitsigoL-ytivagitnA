@@ -33,7 +33,7 @@ description: "See what's included with every Antigravity Logistics job — profe
       flex-direction: column;
       align-items: flex-start;
       gap: 14px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
       overflow: hidden;
       isolation: isolate;
@@ -58,6 +58,8 @@ description: "See what's included with every Antigravity Logistics job — profe
 
     .included-card:hover::before { transform: scaleX(1); }
 
+    /* ---- Photo layer ---------------------------------------------- */
+
     .card-photo {
       position: absolute;
       inset: 0;
@@ -70,6 +72,8 @@ description: "See what's included with every Antigravity Logistics job — profe
       z-index: 0;
       pointer-events: none;
     }
+
+    /* Gradient mask — full photo on the right, fades to white on the left */
 
     .card-photo::after {
       content: '';
@@ -84,15 +88,43 @@ description: "See what's included with every Antigravity Logistics job — profe
       );
     }
 
-    .included-card:hover .card-photo {
-      opacity: 1;
-      transform: scale(1);
+    /* Desktop: hover reveals the photo */
+
+    @media (hover: hover) and (pointer: fine) {
+      .included-card:hover .card-photo {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Touch devices (iPhone, Android, iPad, etc.):
+       photos are always visible at low opacity so users can see context */
+
+    @media (hover: none) {
+      .card-photo {
+        opacity: 0.22;
+        transform: scale(1);
+      }
+
+      /* Stronger white fade on the left so text stays readable */
+
+      .card-photo::after {
+        background: linear-gradient(
+          100deg,
+          rgba(255, 255, 255, 0.99) 0%,
+          rgba(255, 255, 255, 0.95) 40%,
+          rgba(255, 255, 255, 0.82) 70%,
+          rgba(255, 255, 255, 0.6) 100%
+        );
+      }
     }
 
     .included-card > *:not(.card-photo) {
       position: relative;
       z-index: 1;
     }
+
+    /* ---- First card (spans 2x2) ------------------------------------ */
 
     .included-card:first-child {
       grid-column: span 2;
@@ -120,6 +152,8 @@ description: "See what's included with every Antigravity Logistics job — profe
       );
     }
 
+    /* ---- Icon tile ------------------------------------------------ */
+
     .included-icon {
       width: 48px;
       height: 48px;
@@ -139,6 +173,8 @@ description: "See what's included with every Antigravity Logistics job — profe
     }
 
     .included-icon svg { width: 24px; height: 24px; }
+
+    /* ---- Copy ----------------------------------------------------- */
 
     .included-card h3 {
       font-family: var(--font-head);
@@ -166,6 +202,8 @@ description: "See what's included with every Antigravity Logistics job — profe
       .included-card p { font-size: 0.88rem; }
     }
 
+    /* ---- Pricing section ------------------------------------------ */
+
     .pricing-section {
       background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
       color: var(--white);
@@ -191,6 +229,8 @@ description: "See what's included with every Antigravity Logistics job — profe
     .pricing-section p { color: #cfcfd1; }
 
     .pricing-section .wrap { position: relative; z-index: 1; }
+
+    /* ---- Quote band ------------------------------------------------ */
 
     .quote-band {
       background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);

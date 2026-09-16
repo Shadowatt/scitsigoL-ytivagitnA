@@ -31,15 +31,15 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
       z-index: 1;
     }
 
-    .filter-btn {
+        .filter-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 8px 18px;
-      background: transparent;
-      border: 2px solid #333;
+      background: var(--white);
+      border: 2px solid var(--grey-light);
       border-radius: 999px;
-      color: #cfcfd1;
+      color: var(--black);
       font-family: var(--font-head);
       font-weight: 600;
       font-size: 0.95rem;
@@ -50,7 +50,8 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
 
     .filter-btn:hover {
       border-color: var(--orange);
-      color: var(--white);
+      color: var(--orange);
+      background: rgba(255, 80, 51, 0.06);
     }
 
     .filter-btn.is-active {
@@ -138,8 +139,6 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
       transform: translateY(0);
       opacity: 1;
     }
-
-    /* Small tag pill inside the caption */
 
     .gallery-tag {
       display: inline-block;
@@ -375,8 +374,6 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
 {% include "footer.njk" %}
 
 <script>
-// ---- Gallery filter tabs ------------------------------------------
-
 (function () {
   var buttons = document.querySelectorAll('.filter-btn');
   var items = document.querySelectorAll('.gallery-item');
@@ -386,11 +383,9 @@ description: "See real jobs from Antigravity Logistics — residential moves, me
     btn.addEventListener('click', function () {
       var filter = btn.getAttribute('data-filter');
 
-      // Active state
       buttons.forEach(function (b) { b.classList.remove('is-active'); });
       btn.classList.add('is-active');
 
-      // Show/hide items
       items.forEach(function (item) {
         var cats = (item.getAttribute('data-category') || '').split(' ');
         var show = (filter === 'all') || cats.indexOf(filter) !== -1;

@@ -41,6 +41,82 @@ description: "Request a free quote for residential removals, commercial relocati
       max-width: 100%;
     }
 
+    /* Fieldset separator for optional section */
+
+    .form-section-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--grey);
+      margin: 32px 0 18px;
+      padding-top: 24px;
+      border-top: 1px solid var(--grey-light);
+      max-width: 100%;
+    }
+
+    .form-group input[type="date"],
+    .form-group input[type="time"] {
+      cursor: text;
+    }
+
+    /* Checkbox row */
+
+    .checkbox-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .checkbox-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: var(--white);
+      border: 2px solid var(--grey-light);
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      user-select: none;
+    }
+
+    .checkbox-pill:hover {
+      border-color: var(--orange);
+    }
+
+    .checkbox-pill input {
+      display: none;
+    }
+
+    .checkbox-pill::before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--grey-light);
+      border-radius: 4px;
+      background: var(--white);
+      transition: background 0.15s ease, border-color 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .checkbox-pill input:checked ~ *,
+    .checkbox-pill:has(input:checked) {
+      border-color: var(--orange);
+      background: rgba(255, 80, 51, 0.05);
+    }
+
+    .checkbox-pill:has(input:checked)::before {
+      background: var(--orange);
+      border-color: var(--orange);
+      box-shadow: inset 0 0 0 3px var(--white);
+    }
+
+    /* ---- Info column ---------------------------------------------- */
+
     .info-block { margin-bottom: 40px; }
 
     .info-block h2 {
@@ -262,6 +338,197 @@ description: "Request a free quote for residential removals, commercial relocati
 
     .reviews-summary .read-link:hover { color: var(--white); }
 
+    /* ---- Confirmation modal --------------------------------------- */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 16, 17, 0.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .modal-backdrop.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: var(--white);
+      border-radius: 16px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 40px 36px 32px;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      transform: translateY(12px) scale(0.98);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .modal-backdrop.is-open .modal-card {
+      transform: translateY(0) scale(1);
+    }
+
+    @media (max-width: 480px) {
+      .modal-card { padding: 32px 24px 26px; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--off-white);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--black);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .modal-close svg { width: 18px; height: 18px; }
+
+    .modal-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-icon svg { width: 28px; height: 28px; }
+
+    .modal-card h2 {
+      font-size: 1.6rem;
+      margin: 0 0 8px;
+      color: var(--black);
+    }
+
+    .modal-card > p {
+      color: #4d4d4f;
+      margin: 0 0 24px;
+      font-size: 1rem;
+      max-width: 100%;
+    }
+
+    .modal-summary {
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin: 0 0 24px;
+      font-size: 0.92rem;
+    }
+
+    .modal-summary dl {
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 10px 16px;
+      max-width: 100%;
+    }
+
+    .modal-summary dt {
+      color: var(--grey);
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      align-self: center;
+    }
+
+    .modal-summary dd {
+      margin: 0;
+      color: var(--black);
+      font-weight: 500;
+      word-break: break-word;
+    }
+
+    @media (max-width: 480px) {
+      .modal-summary dl { grid-template-columns: 1fr; gap: 4px 0; }
+      .modal-summary dt { margin-top: 8px; }
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .modal-actions .btn {
+      flex: 1;
+      text-align: center;
+      min-width: 130px;
+    }
+
+    .btn--ghost-dark {
+      background: transparent;
+      color: var(--black);
+      border: 2px solid var(--grey-light);
+    }
+
+    .btn--ghost-dark:hover,
+    .btn--ghost-dark:focus-visible {
+      background: var(--off-white);
+      color: var(--black);
+      border-color: var(--black);
+    }
+
+    .modal-contact {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+    }
+
+    .modal-contact li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--off-white);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .modal-contact svg {
+      width: 20px;
+      height: 20px;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .modal-contact a {
+      color: var(--black);
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .modal-contact a:hover { color: var(--orange); }
+
     @media (max-width: 480px) {
       .call-card a { font-size: 1.4rem; }
       .review-stars { font-size: 1.25rem; }
@@ -298,10 +565,8 @@ description: "Request a free quote for residential removals, commercial relocati
           <strong>❌ Something went wrong.</strong> Please try again or contact us directly by phone.
         </div>
 
-        <form id="quoteForm" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-          <input type="checkbox" name="botcheck" style="display: none;">
-          <input type="hidden" name="subject" value="New Quote Request from Antigravity Logistics">
+        <form id="quoteForm" novalidate>
+          <!-- Required fields -->
 
           <div class="form-group">
             <label for="service">What service do you need? *</label>
@@ -348,6 +613,55 @@ description: "Request a free quote for residential removals, commercial relocati
             </div>
           </div>
 
+          <!-- Optional details -->
+
+          <p class="form-section-title">Optional details</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Preferred date</label>
+              <input type="date" id="date" name="date">
+            </div>
+            <div class="form-group">
+              <label for="time">Preferred time window</label>
+              <select id="time" name="time">
+                <option value="">Any time</option>
+                <option value="morning">Morning (7am–12pm)</option>
+                <option value="afternoon">Afternoon (12pm–5pm)</option>
+                <option value="evening">Evening (after 5pm)</option>
+                <option value="flexible">Flexible</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="volume">Estimated size</label>
+            <select id="volume" name="volume">
+              <option value="">— Not sure —</option>
+              <option value="single-item">Single item</option>
+              <option value="small">Small (studio / 1 bedroom)</option>
+              <option value="medium">Medium (2–3 bedrooms)</option>
+              <option value="large">Large (4+ bedrooms)</option>
+              <option value="office">Office / commercial</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Access details</label>
+            <div class="checkbox-row">
+              <label class="checkbox-pill"><input type="checkbox" name="access" value="stairs"><span>Stairs</span></label>
+              <label class="checkbox-pill"><input type="checkbox" name="access" value="no-elevator"><span>No elevator</span></label>
+              <label class="checkbox-pill"><input type="checkbox" name="access" value="tight-access"><span>Tight access</span></label>
+              <label class="checkbox-pill"><input type="checkbox" name="access" value="long-carry"><span>Long carry</span></label>
+              <label class="checkbox-pill"><input type="checkbox" name="access" value="parking"><span>Parking restrictions</span></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Anything else we should know?</label>
+            <textarea id="notes" name="notes" placeholder="Fragile items, packing help needed, special requirements, preferred contact method…" style="min-height: 90px;"></textarea>
+          </div>
+
           <button type="submit" class="btn quote-submit">Send Quote Request →</button>
 
           <p class="quote-note">We'll respond within 24 hours. Your details are safe with us.</p>
@@ -389,7 +703,7 @@ description: "Request a free quote for residential removals, commercial relocati
 
         <div class="reviews-summary">
           <h3>What our customers say</h3>
-          <div class="review-stars" aria-label="Rated 4.8 or higher out of 5">
+          <div class="review-stars" aria-label="Rated 5 out of 5">
             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
           </div>
           <div class="review-rating">
@@ -410,6 +724,60 @@ description: "Request a free quote for residential removals, commercial relocati
 
 {% include "footer.njk" %}
 
+<!-- ====== CONFIRMATION MODAL ====== -->
+
+<div class="modal-backdrop" id="confirmModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+
+    <button type="button" class="modal-close" aria-label="Close" data-action="cancel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <!-- Step 1: Confirm -->
+    <div class="modal-step" data-step="confirm">
+      <div class="modal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 id="modalTitle">Ready to send?</h2>
+      <p>Please review your details before sending us your quote request.</p>
+
+      <div class="modal-summary">
+        <dl id="modalSummary"></dl>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn--ghost-dark" data-action="cancel">Go back</button>
+        <button type="button" class="btn" data-action="confirm">Confirm &amp; send →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Not configured -->
+    <div class="modal-step" data-step="done" hidden>
+      <div class="modal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <h2>Almost there</h2>
+      <p>This form isn't connected to a backend yet, so we couldn't send it automatically. Please contact us directly to finish your request — we usually reply within a few hours.</p>
+
+      <ul class="modal-contact">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+61422553675">0422 553 675</a>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></svg>
+          <a href="mailto:antigravitylogistics@gmail.com">antigravitylogistics@gmail.com</a>
+        </li>
+      </ul>
+
+      <div class="modal-actions">
+        <button type="button" class="btn" data-action="cancel" style="width:100%;">Got it</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <script>
 // ============================================================
 // 1. Pre-select service from URL (?service=transport)
@@ -428,56 +796,125 @@ description: "Request a free quote for residential removals, commercial relocati
       select.selectedIndex = i;
       select.style.transition = 'box-shadow 0.4s ease';
       select.style.boxShadow = '0 0 0 4px rgba(255, 80, 51, 0.25)';
-      setTimeout(function () {
-        select.style.boxShadow = 'none';
-      }, 1400);
+      setTimeout(function () { select.style.boxShadow = 'none'; }, 1400);
       break;
     }
   }
 })();
 
 // ============================================================
-// 2. Form validation
+// 2. Form → confirmation modal → "not configured" message
 // ============================================================
 
-const form = document.getElementById('quoteForm');
-const successDiv = document.getElementById('formSuccess');
-const errorDiv = document.getElementById('formError');
+(function () {
+  var form = document.getElementById('quoteForm');
+  var modal = document.getElementById('confirmModal');
+  var summary = document.getElementById('modalSummary');
+  var stepConfirm = modal.querySelector('[data-step="confirm"]');
+  var stepDone = modal.querySelector('[data-step="done"]');
+  var successDiv = document.getElementById('formSuccess');
+  var errorDiv = document.getElementById('formError');
 
-if (form) {
-  form.addEventListener('submit', function(e) {
+  if (!form || !modal) return;
+
+  function openModal() {
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    stepConfirm.hidden = false;
+    stepDone.hidden = true;
+  }
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function buildSummary() {
+    var serviceSelect = document.getElementById('service');
+    var serviceText = serviceSelect.options[serviceSelect.selectedIndex].text;
+
+    var access = [];
+    document.querySelectorAll('input[name="access"]:checked').forEach(function (cb) {
+      access.push(cb.parentElement.textContent.trim());
+    });
+
+    var rows = [
+      ['Service', serviceText],
+      ['Name', document.getElementById('name').value.trim() || '—'],
+      ['Email', document.getElementById('email').value.trim() || '—'],
+      ['Phone', document.getElementById('phone').value.trim() || '—'],
+      ['Pickup', document.getElementById('pickup').value.trim() || '—'],
+      ['Delivery', document.getElementById('delivery').value.trim() || '—'],
+      ['Preferred date', document.getElementById('date').value || '—'],
+      ['Time window', document.getElementById('time').value || '—'],
+      ['Estimated size', document.getElementById('volume').value || '—'],
+      ['Access', access.length ? access.join(', ') : '—']
+    ];
+
+    summary.innerHTML = rows.map(function (row) {
+      return '<dt>' + row[0] + '</dt><dd>' + row[1] + '</dd>';
+    }).join('');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
     successDiv.classList.remove('is-visible');
     errorDiv.classList.remove('is-visible');
 
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const service = document.getElementById('service').value;
-    const message = document.getElementById('message').value.trim();
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var service = document.getElementById('service').value;
+    var message = document.getElementById('message').value.trim();
 
     if (!name || !email || !service || !message) {
       errorDiv.textContent = '❌ Please fill in all required fields (*).';
       errorDiv.classList.add('is-visible');
-      e.preventDefault();
+      errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
 
     if (!email.includes('@') || !email.includes('.')) {
       errorDiv.textContent = '❌ Please enter a valid email address.';
       errorDiv.classList.add('is-visible');
-      e.preventDefault();
+      errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
 
-    const btn = form.querySelector('button[type="submit"]');
-    btn.textContent = '⏳ Sending...';
-    btn.disabled = true;
-
-    setTimeout(() => {
-      btn.textContent = 'Send Quote Request →';
-      btn.disabled = false;
-    }, 5000);
+    buildSummary();
+    openModal();
   });
-}
+
+  // Modal actions
+
+  modal.addEventListener('click', function (e) {
+    var action = e.target.getAttribute('data-action');
+    if (!action) return;
+
+    if (action === 'cancel') {
+      closeModal();
+    } else if (action === 'confirm') {
+      // Swap to the "not configured" step
+      stepConfirm.hidden = true;
+      stepDone.hidden = false;
+    }
+  });
+
+  // Close on backdrop click
+
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) closeModal();
+  });
+
+  // Close on Escape
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeModal();
+    }
+  });
+})();
 </script>
 
 </body>
