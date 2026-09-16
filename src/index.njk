@@ -145,125 +145,15 @@ description: "Removals, transport, heavy handling and logistics for businesses, 
     .service-grid .service-card:first-child .service-icon { width: 88px; height: 88px; }
     .service-grid .service-card:first-child .service-icon img { width: 42px; height: 42px; }
 
-    /* ---- How It Works — timeline ----------------------------------- */
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-top: 56px;
-      position: relative;
-      background: transparent;
-    }
-
-    .steps::before {
-      content: '';
-      position: absolute;
-      top: 44px;
-      left: 12.5%;
-      right: 12.5%;
-      height: 2px;
-      background: repeating-linear-gradient(
-        to right,
-        var(--orange) 0,
-        var(--orange) 6px,
-        transparent 6px,
-        transparent 14px
-      );
-      opacity: 0.4;
-      z-index: 0;
-    }
-
-    .step {
-      background: transparent;
-      padding: 0 12px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-      transition: transform 0.25s ease;
-    }
-
-    .step:hover { transform: translateY(-4px); }
-
-    .step-num {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      background: var(--white);
-      border: 3px solid var(--orange);
-      color: var(--orange);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-head);
-      font-weight: 800;
-      font-size: 2.4rem;
-      line-height: 1;
-      margin: 0 auto 22px;
-      position: relative;
-      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
-      box-shadow: 0 6px 20px rgba(15, 16, 17, 0.06);
-    }
-
-    .step:hover .step-num {
-      background: var(--orange);
-      color: var(--white);
-      transform: scale(1.05);
-    }
-
-    .step h3 { font-size: 1.25rem; margin: 0 0 8px; }
-
-    .step p {
-      font-size: 0.95rem;
-      color: #4d4d4f;
-      margin: 0 auto;
-      max-width: 22ch;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 800px) {
-      .steps {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        margin-top: 40px;
-      }
-
-      .steps::before {
-        top: 44px;
-        bottom: 44px;
-        left: 44px;
-        right: auto;
-        width: 2px;
-        height: auto;
-        background: repeating-linear-gradient(
-          to bottom,
-          var(--orange) 0,
-          var(--orange) 6px,
-          transparent 6px,
-          transparent 14px
-        );
-      }
-
-      .step {
-        display: flex;
-        align-items: flex-start;
-        gap: 24px;
-        text-align: left;
-        padding: 0;
-      }
-
-      .step-num { margin: 0; flex-shrink: 0; }
-      .step p { margin: 0; max-width: 100%; }
-      .step h3 { margin-bottom: 6px; }
-    }
-
-    /* ---- Quote band ------------------------------------------------ */
+    /* ---- Quote band (light) --------------------------------------- */
 
     .quote-band {
-      background: linear-gradient(135deg, var(--black) 0%, #1a1b1d 100%);
+      background: linear-gradient(135deg, var(--off-white) 0%, #ffffff 100%);
       padding: 80px 0;
       position: relative;
       overflow: hidden;
+      border-top: 1px solid var(--grey-light);
+      border-bottom: 1px solid var(--grey-light);
     }
 
     .quote-band::before {
@@ -274,7 +164,7 @@ description: "Removals, transport, heavy handling and logistics for businesses, 
       width: 380px;
       height: 380px;
       background: var(--orange);
-      opacity: 0.07;
+      opacity: 0.08;
       transform: rotate(45deg);
       pointer-events: none;
     }
@@ -313,10 +203,14 @@ description: "Removals, transport, heavy handling and logistics for businesses, 
       margin-bottom: 14px;
     }
 
-    .quote-band-text h2 { color: var(--white); margin-bottom: 12px; max-width: 22ch; }
+    .quote-band-text h2 {
+      color: var(--black);
+      margin-bottom: 12px;
+      max-width: 22ch;
+    }
 
     .quote-band-text p {
-      color: #cfcfd1;
+      color: #4d4d4f;
       margin: 0;
       max-width: 52ch;
       font-size: 1.05rem;
@@ -590,46 +484,7 @@ description: "Removals, transport, heavy handling and logistics for businesses, 
   </div>
 </section>
 
-<!-- ====== HOW IT WORKS ====== -->
-
-<section class="section">
-  <div class="wrap">
-    <h2 class="reveal">How It Works</h2>
-    <p class="reveal" style="max-width:52ch;">A simple, four-step process from first contact to job done.</p>
-    <div class="steps reveal-group">
-      <div class="step reveal">
-        <span class="step-num">1</span>
-        <div>
-          <h3>Get in touch</h3>
-          <p>Call, email or message us with a few details about the job.</p>
-        </div>
-      </div>
-      <div class="step reveal">
-        <span class="step-num">2</span>
-        <div>
-          <h3>Get a quote</h3>
-          <p>We ask a few questions and come back with a straight answer on price.</p>
-        </div>
-      </div>
-      <div class="step reveal">
-        <span class="step-num">3</span>
-        <div>
-          <h3>Schedule</h3>
-          <p>We lock in a date and time that works for you.</p>
-        </div>
-      </div>
-      <div class="step reveal">
-        <span class="step-num">4</span>
-        <div>
-          <h3>Job done</h3>
-          <p>Our team handles it professionally, start to finish.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== QUOTE BAND ====== -->
+<!-- ====== QUOTE BAND (light) ====== -->
 
 <section class="quote-band">
   <div class="wrap">
