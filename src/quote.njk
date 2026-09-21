@@ -41,27 +41,97 @@ description: "Request a free quote for residential removals, commercial relocati
       max-width: 100%;
     }
 
-    /* Fieldset separator for optional section */
+    /* ---- Optional details — collapsible section ------------------- */
 
-    .form-section-title {
+    .optional-section {
+      margin: 28px 0 8px;
+      border: 1px solid var(--grey-light);
+      border-radius: 12px;
+      background: var(--white);
+      overflow: hidden;
+      transition: border-color 0.25s ease;
+    }
+
+    .optional-section[open] {
+      border-color: var(--orange);
+    }
+
+    .optional-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 20px;
+      cursor: pointer;
+      list-style: none;
       font-family: var(--font-head);
       font-weight: 700;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
+      font-size: 1rem;
+      color: var(--black);
+      letter-spacing: 0.2px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .optional-toggle::-webkit-details-marker { display: none; }
+
+    .optional-toggle:hover {
+      color: var(--orange);
+      background: rgba(255, 80, 51, 0.04);
+    }
+
+    .optional-section[open] .optional-toggle {
+      color: var(--orange);
+      border-bottom: 1px solid var(--grey-light);
+    }
+
+    .optional-toggle-text {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .optional-toggle-text .optional-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--orange);
+    }
+
+    .optional-toggle .optional-hint {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.82rem;
       color: var(--grey);
-      margin: 32px 0 18px;
-      padding-top: 24px;
-      border-top: 1px solid var(--grey-light);
-      max-width: 100%;
+      letter-spacing: 0;
+      margin-left: 4px;
     }
 
-    .form-group input[type="date"],
-    .form-group input[type="time"] {
-      cursor: text;
+    .optional-section[open] .optional-toggle .optional-hint {
+      display: none;
     }
 
-    /* Checkbox row */
+    .optional-chevron {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      color: var(--orange);
+    }
+
+    .optional-section[open] .optional-chevron {
+      transform: rotate(180deg);
+    }
+
+    .optional-body {
+      padding: 24px 20px 20px;
+    }
+
+    @media (max-width: 480px) {
+      .optional-toggle { padding: 14px 16px; font-size: 0.95rem; }
+      .optional-body { padding: 20px 16px 16px; }
+    }
+
+    /* ---- Checkbox pills ------------------------------------------ */
 
     .checkbox-row {
       display: flex;
@@ -73,15 +143,15 @@ description: "Request a free quote for residential removals, commercial relocati
     .checkbox-pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
+      padding: 10px 18px;
       background: var(--white);
       border: 2px solid var(--grey-light);
       border-radius: 999px;
       font-size: 0.9rem;
       cursor: pointer;
-      transition: border-color 0.2s ease, background 0.2s ease;
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
       user-select: none;
+      color: var(--black);
     }
 
     .checkbox-pill:hover {
@@ -89,30 +159,22 @@ description: "Request a free quote for residential removals, commercial relocati
     }
 
     .checkbox-pill input {
-      display: none;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
     }
 
-    .checkbox-pill::before {
-      content: '';
-      width: 16px;
-      height: 16px;
-      border: 2px solid var(--grey-light);
-      border-radius: 4px;
-      background: var(--white);
-      transition: background 0.15s ease, border-color 0.15s ease;
-      flex-shrink: 0;
-    }
-
-    .checkbox-pill input:checked ~ *,
     .checkbox-pill:has(input:checked) {
       border-color: var(--orange);
-      background: rgba(255, 80, 51, 0.05);
+      background: rgba(255, 80, 51, 0.08);
+      color: var(--orange);
     }
 
-    .checkbox-pill:has(input:checked)::before {
-      background: var(--orange);
-      border-color: var(--orange);
-      box-shadow: inset 0 0 0 3px var(--white);
+    .checkbox-pill:has(input:focus-visible) {
+      outline: 3px solid var(--orange);
+      outline-offset: 2px;
     }
 
     /* ---- Info column ---------------------------------------------- */
@@ -566,6 +628,7 @@ description: "Request a free quote for residential removals, commercial relocati
         </div>
 
         <form id="quoteForm" novalidate>
+
           <!-- Required fields -->
 
           <div class="form-group">
@@ -613,54 +676,90 @@ description: "Request a free quote for residential removals, commercial relocati
             </div>
           </div>
 
-          <!-- Optional details -->
+          <!-- Optional details — collapsible -->
 
-          <p class="form-section-title">Optional details</p>
+          <details class="optional-section" id="optionalDetails">
+            <summary class="optional-toggle">
+              <span class="optional-toggle-text">
+                <svg class="optional-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                Optional details
+                <span class="optional-hint">— helps us quote more accurately</span>
+              </span>
+              <svg class="optional-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </summary>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="date">Preferred date</label>
-              <input type="date" id="date" name="date">
+            <div class="optional-body">
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="date">Preferred date</label>
+                  <input type="date" id="date" name="date">
+                </div>
+                <div class="form-group">
+                  <label for="time">Preferred time window</label>
+                  <select id="time" name="time">
+                    <option value="">Any time</option>
+                    <option value="morning">Morning (7am–12pm)</option>
+                    <option value="afternoon">Afternoon (12pm–5pm)</option>
+                    <option value="evening">Evening (after 5pm)</option>
+                    <option value="flexible">Flexible</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="volume">Estimated size</label>
+                  <select id="volume" name="volume">
+                    <option value="">— Not sure —</option>
+                    <option value="single-item">Single item</option>
+                    <option value="small">Small (studio / 1 bedroom)</option>
+                    <option value="medium">Medium (2–3 bedrooms)</option>
+                    <option value="large">Large (4+ bedrooms)</option>
+                    <option value="office">Office / commercial</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="floor">Floor / level</label>
+                  <input type="text" id="floor" name="floor" placeholder="e.g. 2nd floor, ground">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Access details</label>
+                <div class="checkbox-row">
+                  <label class="checkbox-pill"><input type="checkbox" name="access" value="stairs"><span>Stairs</span></label>
+                  <label class="checkbox-pill"><input type="checkbox" name="access" value="no-elevator"><span>No elevator</span></label>
+                  <label class="checkbox-pill"><input type="checkbox" name="access" value="tight-access"><span>Tight access</span></label>
+                  <label class="checkbox-pill"><input type="checkbox" name="access" value="long-carry"><span>Long carry</span></label>
+                  <label class="checkbox-pill"><input type="checkbox" name="access" value="parking"><span>Parking restrictions</span></label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Services needed</label>
+                <div class="checkbox-row">
+                  <label class="checkbox-pill"><input type="checkbox" name="extras" value="packing"><span>Packing help</span></label>
+                  <label class="checkbox-pill"><input type="checkbox" name="extras" value="assembly"><span>Assembly / disassembly</span></label>
+                  <label class="checkbox-pill"><input type="checkbox" name="extras" value="disposal"><span>Disposal</span></label>
+                  <label class="checkbox-pill"><input type="checkbox" name="extras" value="storage"><span>Storage</span></label>
+                  <label class="checkbox-pill"><input type="checkbox" name="extras" value="fragile"><span>Fragile items</span></label>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="notes">Anything else we should know?</label>
+                <textarea id="notes" name="notes" placeholder="Special requirements, preferred contact method, unusual items, parking notes…" style="min-height: 90px;"></textarea>
+              </div>
+
             </div>
-            <div class="form-group">
-              <label for="time">Preferred time window</label>
-              <select id="time" name="time">
-                <option value="">Any time</option>
-                <option value="morning">Morning (7am–12pm)</option>
-                <option value="afternoon">Afternoon (12pm–5pm)</option>
-                <option value="evening">Evening (after 5pm)</option>
-                <option value="flexible">Flexible</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="volume">Estimated size</label>
-            <select id="volume" name="volume">
-              <option value="">— Not sure —</option>
-              <option value="single-item">Single item</option>
-              <option value="small">Small (studio / 1 bedroom)</option>
-              <option value="medium">Medium (2–3 bedrooms)</option>
-              <option value="large">Large (4+ bedrooms)</option>
-              <option value="office">Office / commercial</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Access details</label>
-            <div class="checkbox-row">
-              <label class="checkbox-pill"><input type="checkbox" name="access" value="stairs"><span>Stairs</span></label>
-              <label class="checkbox-pill"><input type="checkbox" name="access" value="no-elevator"><span>No elevator</span></label>
-              <label class="checkbox-pill"><input type="checkbox" name="access" value="tight-access"><span>Tight access</span></label>
-              <label class="checkbox-pill"><input type="checkbox" name="access" value="long-carry"><span>Long carry</span></label>
-              <label class="checkbox-pill"><input type="checkbox" name="access" value="parking"><span>Parking restrictions</span></label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="notes">Anything else we should know?</label>
-            <textarea id="notes" name="notes" placeholder="Fragile items, packing help needed, special requirements, preferred contact method…" style="min-height: 90px;"></textarea>
-          </div>
+          </details>
 
           <button type="submit" class="btn quote-submit">Send Quote Request →</button>
 
@@ -803,7 +902,23 @@ description: "Request a free quote for residential removals, commercial relocati
 })();
 
 // ============================================================
-// 2. Form → confirmation modal → "not configured" message
+// 2. Auto-open optional section if it has values from URL
+//    (nice-to-have — future-proofing for pre-filled links)
+// ============================================================
+
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var optionalKeys = ['date', 'time', 'volume', 'floor', 'access', 'extras'];
+  var hasOptional = optionalKeys.some(function (k) { return params.has(k); });
+
+  if (hasOptional) {
+    var details = document.getElementById('optionalDetails');
+    if (details) details.open = true;
+  }
+})();
+
+// ============================================================
+// 3. Form → confirmation modal → "not configured" message
 // ============================================================
 
 (function () {
@@ -840,6 +955,16 @@ description: "Request a free quote for residential removals, commercial relocati
       access.push(cb.parentElement.textContent.trim());
     });
 
+    var extras = [];
+    document.querySelectorAll('input[name="extras"]:checked').forEach(function (cb) {
+      extras.push(cb.parentElement.textContent.trim());
+    });
+
+    var dateVal = document.getElementById('date').value || '—';
+    var timeVal = document.getElementById('time').value || '—';
+    var volumeVal = document.getElementById('volume').value || '—';
+    var floorVal = document.getElementById('floor').value.trim() || '—';
+
     var rows = [
       ['Service', serviceText],
       ['Name', document.getElementById('name').value.trim() || '—'],
@@ -847,10 +972,12 @@ description: "Request a free quote for residential removals, commercial relocati
       ['Phone', document.getElementById('phone').value.trim() || '—'],
       ['Pickup', document.getElementById('pickup').value.trim() || '—'],
       ['Delivery', document.getElementById('delivery').value.trim() || '—'],
-      ['Preferred date', document.getElementById('date').value || '—'],
-      ['Time window', document.getElementById('time').value || '—'],
-      ['Estimated size', document.getElementById('volume').value || '—'],
-      ['Access', access.length ? access.join(', ') : '—']
+      ['Preferred date', dateVal],
+      ['Time window', timeVal],
+      ['Estimated size', volumeVal],
+      ['Floor / level', floorVal],
+      ['Access', access.length ? access.join(', ') : '—'],
+      ['Extras', extras.length ? extras.join(', ') : '—']
     ];
 
     summary.innerHTML = rows.map(function (row) {
@@ -895,7 +1022,6 @@ description: "Request a free quote for residential removals, commercial relocati
     if (action === 'cancel') {
       closeModal();
     } else if (action === 'confirm') {
-      // Swap to the "not configured" step
       stepConfirm.hidden = true;
       stepDone.hidden = false;
     }
